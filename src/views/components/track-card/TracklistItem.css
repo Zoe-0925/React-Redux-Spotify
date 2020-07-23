@@ -1,0 +1,36 @@
+.TracklistItem{
+    display:flex;
+    align-items: center;
+    height:100%;
+    padding:0 1rem;
+    background-color: grey;
+    margin-left: 7%;
+    margin-right: 7%;
+}
+
+.main{
+    margin-left: 2%;
+}
+
+.space{
+    width:60%;
+}
+
+.time{
+    text-align-last: right;
+}
+
+.MainContainer{
+    width: 100%;
+}
+
+.artist-name:hover, .album-name:hover{
+cursor: pointer;
+text-decoration: underline;
+color:white;
+}
+
+.artist-album-name-container{
+    display:flex;
+    align-items: left;
+}
