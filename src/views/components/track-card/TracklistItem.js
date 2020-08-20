@@ -11,7 +11,7 @@ import { Icon } from 'semantic-ui-react'
 import history from "../../../core/history"
 import 'semantic-ui-css/semantic.min.css';
 
-export default function TracklistItemNew(props) {
+export default function TracklistItem(props) {
     const [saved, setSaved] = useState(props.saved)
 
     //TODO 
@@ -67,7 +67,6 @@ export default function TracklistItemNew(props) {
     }
 
     return (
-
         <li>
             <div className="songIcon">
                 {!playIcon && <NoteIcon className="noteI" onClick={pauseTrack} />}
@@ -97,7 +96,7 @@ export default function TracklistItemNew(props) {
     )
 }
 
-TracklistItemNew.prototype = {
+TracklistItem.prototype = {
     current: PropTypes.object,
     previous: PropTypes.object,
     next: PropTypes.object,

@@ -19,7 +19,7 @@ export default function ArtistCard(props) {
 
     return (
         <div className="card" key={uuidv4()} onClick={fetchArtists}>
-            <div className="artist-card-image">
+            <div className={props.round ? "artist-card-image round" : "artist-card-image"}>
                 <img src={props.imgSrc} alt="track-card" key={uuidv4()}
                 />
             </div>
@@ -36,8 +36,8 @@ export default function ArtistCard(props) {
 }
 
 ArtistCard.prototype = {
-    subtitle:PropTypes.string,
-    title:PropTypes.string,
-    imgSrc:PropTypes.string,
-    artistId:PropTypes.string,
+    subtitle: PropTypes.string,
+    title: PropTypes.string,
+    imgSrc: PropTypes.string,
+    artistId: PropTypes.string,
 }

@@ -71,26 +71,29 @@ body {
         text-align: left;
         width: 230px;
         background-color: $nearlyBlack;
+        height:100%;
 
-        .nav-item {
-          cursor: pointer;
+        .nav-icon {
+          font-size: 2rem;
+          color: $greyText;
         }
 
-        .nav-divider{
-          font-size:0.85rem;
+        .nav-divider {
+          font-size: 0.85rem;
           margin-left: 2rem;
+          margin-top: 2rem;
+          margin-bottom: 1rem;
         }
 
         .link {
           margin-left: 1rem;
         }
 
-        .link:hover{
+        .link:hover {
           color: white;
-          opacity: 1
+          opacity: 1;
         }
       }
-
 
       .main {
         width: 100%;
@@ -98,7 +101,7 @@ body {
         overflow-y: scroll;
         position: relative;
         padding-top: 3.4rem;
-        padding-left: 2rem;
+        padding-left: 0.5rem;
         background-color: $greyLight;
         .mainContent {
           color: white;
@@ -149,19 +152,17 @@ body {
 }
 
 .playIcon {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  overflow: hidden;
-  display: flex;
-  background: $greenMain;
-  margin-left: auto;
-  opacity: 0;
-  position: absolute;
-  right: 1.2rem;
-  bottom: 1.2rem;
+  @extend .playIcon;
+  opacity: 1;
+  position: relative;
+  margin-left: 0;
+  height: 56px;
+  width: 56px;
+  right: 0;
+  bottom: 0;
   svg {
-    margin: auto;
+    height: 26px;
+    width: 26px;
   }
 }
 
@@ -185,15 +186,12 @@ body {
     text-align: center;
     padding: 1.5rem 0;
     .playlistPageImage {
-      width: 250px;
-      height: 250px;
-      img {
-        height: 100%;
-        width: 100%;
-        object-fit: cover;
-        -webkit-box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);
-        box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);
-      }
+      font-size:15.625rem;
+      width: 15.625rem;
+      height: 15.625rem;
+      object-fit: cover;
+      -webkit-box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);
     }
   }
   .playlistPageSongs {
@@ -242,6 +240,7 @@ body {
       font-family: circular-black;
       word-spacing: -18px;
       letter-spacing: -6px;
+      color:white;
     }
     .tagline {
       font-size: 0.9rem;
@@ -354,17 +353,32 @@ ul.songList {
 }
 
 .LibraryPage {
-  display: flex;
+  display: grid;
 
-  .right {
-    display: grid;
+  .head-row {
+    display: flex;
+    align-items: flex-start;
   }
 
-  button {
-    width: 100px;
-    height: 30px;
+  .tab {
+    width: 5.5rem;
+    height: 3.125rem;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .library-tab {
+    text-align: center;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
     color: white;
-    background-color: $greyLight;
+    font-weight: 600;
+  }
+
+  .selected {
+    background-color: $greyLighter;
   }
 
   ul {
@@ -393,15 +407,15 @@ ul.songList {
       cursor: pointer;
       font-size: 1.875rem;
     }
-
-    .list {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      grid-gap: 1rem;
-      align-items: center;
-      width: 100%;
-    }
   }
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  grid-gap: 0.5rem;
+  align-items: center;
+  width: 100%;
 }
 
 .card {
@@ -459,6 +473,15 @@ ul.songList {
 .ArtistPageHeader {
   color: white;
   width: 100%;
+
+  .playlistPageImage {
+    font-size:15.625rem;
+    width: 15.625rem;
+    height: 15.625rem;
+    object-fit: cover;
+    -webkit-box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);
+  }
 }
 
 .popular {
@@ -522,11 +545,11 @@ ul.songList {
   }
 
   .content {
-    margin-top:0;
+    margin-top: 0;
     margin-bottom: 0;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    grid-gap: 1rem;
+    grid-gap: 0.5rem;
     width: 100%;
   }
 }
@@ -534,3 +557,49 @@ ul.songList {
   color: white;
   padding-bottom: 3rem;
 }
+
+.round {
+  border-radius: 50%;
+}
+
+/**Track list item  below :**/
+
+.TracklistItem {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 1rem;
+  background-color: grey;
+  margin-left: 7%;
+  margin-right: 7%;
+}
+
+.main {
+  margin-left: 2%;
+}
+
+.space {
+  width: 60%;
+}
+
+.time {
+  text-align-last: right;
+}
+
+.MainContainer {
+  width: 100%;
+}
+
+.artist-name:hover,
+.album-name:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  color: white;
+}
+
+.artist-album-name-container {
+  display: flex;
+  align-items: left;
+}
+
+/**Track list item above :**/

@@ -36,25 +36,18 @@ export default function AlbumPage() {
     }
 
     return (
-        <div className="AlbumPage">
-            <div className="contents">
-                <div className="playlistPage">
-                    <div className="mainInner">
-                        {albumsFromStore && <TracklistPageHeader title={albumsFromStore.get("albumType") ? albumsFromStore.get("albumType") : "ALBUM"} imgSrc={albumsFromStore.get("albumImg")}
-                            artistName={albumsFromStore.get("artistName")} playAlbum={playAlbum} toggleSave={toggleSaveAlbum}
-                            albumName={albumsFromStore.get("albumName")} key={uuidv4()} saved={albumSaved}
-                        />}
-                        {albumsFromStore && <ul className="songList">
-                            {tracks.map(each => <TracklistItemNew saved={trackSaved[tracks.indexOf(each)]}
-                                index={tracks.indexOf(each)} key={uuidv4()}
-                                previous={tracks[tracks.indexOf(each) > 0 ? tracks.indexOf(each) - 1 : 0]}
-                                next={tracks[tracks.indexOf(each) + 1 <= tracks.length ? tracks.indexOf(each) + 1 : -1]} current={each}
-                            />)}
+        <div className="mainInner">
+            {albumsFromStore && <TracklistPageHeader title={albumsFromStore.get("albumType") ? albumsFromStore.get("albumType") : "ALBUM"} imgSrc={albumsFromStore.get("albumImg")}
+                artistName={albumsFromStore.get("artistName")} playAlbum={playAlbum} toggleSave={toggleSaveAlbum}
+                albumName={albumsFromStore.get("albumName")} key={uuidv4()} saved={albumSaved}
+            />}
+            {albumsFromStore && <ul className="songList">
+                {tracks.map(each => <TracklistItemNew saved={trackSaved[tracks.indexOf(each)]}
+                    index={tracks.indexOf(each)} key={uuidv4()}
+                    previous={tracks[tracks.indexOf(each) > 0 ? tracks.indexOf(each) - 1 : 0]}
+                    next={tracks[tracks.indexOf(each) + 1 <= tracks.length ? tracks.indexOf(each) + 1 : -1]} current={each}
+                />)}
 
-                        </ul>}
-                    </div>
-                </div>
-                )
-          </div>
+            </ul>}
         </div>)
 }

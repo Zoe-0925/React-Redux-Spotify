@@ -1,65 +1,66 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import { useDispatch, useSelector } from "react-redux"
-import { loadLibraryPage } from "../../core/library/Actions"
-import { SAVED_ALBUMS, SAVED_ARTISTS, SAVED_TRACKS } from "../../core/Constants"
+import React, { useState } from 'react';
 import AlbumCard from "../components/track-card/AlbumCard"
 import ArtistCard from "../components/track-card/ArtistCard"
-import SavedTracks from "../components/tracklist/SavedTracks"
+import TracklistItem from "../components/track-card/TracklistItem"
+import { useDispatchLibraryPage, useSavedTracks } from "./CustomHooks"
+import { ListItem, ListItemText } from '@material-ui/core';
+
+export const SavedTracks = () => {
+    const { trackSaved, tracks, lastTrackElementRef } = useSavedTracks
+
+    return (
+        <ul className="songList">
+            {tracks !== undefined && tracks.map((each, index) => {
+                if (tracks.length === index + 1) {
+                    return (<TracklistItem saved={trackSaved[tracks.indexOf(each)]}
+                        index={tracks.indexOf(each)} key={uuidv4()}
+                        previous={tracks[tracks.indexOf(each) > 0 ? tracks.indexOf(each) - 1 : 0]}
+                        next={tracks[tracks.indexOf(each) + 1 <= tracks.length ? tracks.indexOf(each) + 1 : -1]} current={each}
+                    />)
+                }
+                else {
+                    return (
+                        <TracklistItem saved={trackSaved[tracks.indexOf(each)]}
+                            index={tracks.indexOf(each)} key={uuidv4()}
+                            previous={tracks[tracks.indexOf(each) > 0 ? tracks.indexOf(each) - 1 : 0]}
+                            next={tracks[tracks.indexOf(each) + 1 <= tracks.length ? tracks.indexOf(each) + 1 : -1]} current={each}
+                        />
+                    )
+                }
+            })}
+        </ul>
+    )
+}
 
 export default function LibraryPage() {
     const [view, setView] = useState("albums")
-    const libraryReducer = useSelector(state => state.LibraryReducer)
-    const savedAlbums = libraryReducer.get(SAVED_ALBUMS)
-    const savedArtists = libraryReducer.get(SAVED_ARTISTS)
 
-    const dispatch = useDispatch()
-
-    const fetchLibrary = useCallback(() => {
-        dispatch(loadLibraryPage())
-    }, [dispatch])
-
-    useEffect(() => {
-        if (savedAlbums !== undefined && savedAlbums.length === 0) {
-            fetchLibrary()
-        }
-    }, [savedAlbums, savedArtists])
-
-
-    function fetchAlbums() {
-        setView("albums")
-
-    }
-
-    function fetchArtists() {
-        setView("artists")
-    }
-
-
-    function fetchTracks() {
-        setView("songs")
-    }
+    const { savedArtists, savedAlbums } = useDispatchLibraryPage()
 
     return (
         <div className="LibraryPage" >
-            <div className="right">
-                <div className="head-row" >
-                    <button onClick={fetchAlbums}>Albums</button>
-                    <button onClick={fetchArtists}>Artists</button>
-                    <button onClick={fetchTracks}>Liked Songs</button>
-                </div>
-
-                {view === "albums" && <div className="contents" >
-                    {savedAlbums !== undefined && savedAlbums.length > 0 && savedAlbums.map(each =>
-                        <AlbumCard title={each.get("albumName")} subtitle={each.get("artistNames")} 
-                            artistIds={each.get("artistIds")} albumId={each.get("albumId")} imgSrc={each.get("albumImg")}
-                        />)}
-                </div>}
-                {view === "artists" && <div className="contents">
-                    {savedArtists !== undefined && savedArtists.length > 0 && savedArtists.map(each =>
-                        <ArtistCard title={each.get("artistName")}
-                            subtitle="Artist" artistId={each.get("artistId")} imgSrc={each.get("artistImg")} />)}
-                </div>}
-                {view === "songs" && <SavedTracks />}
+            <div className="head-row" >
+                <ListItem className="tab" button onClick={() => setView("albums")}>
+                    <ListItemText className={view === "albums" ? "library-tab selected" : "library-tab"} primary="Albums" />
+                </ListItem>
+                <ListItem className="tab" button onClick={() => setView("artists")}>
+                    <ListItemText className={view === "artists" ? "library-tab selected" : "library-tab"} primary="Artists" />
+                </ListItem>
+                <ListItem className="tab" button onClick={() => setView("songs")}>
+                    <ListItemText className={view === "songs" ? "library-tab selected" : "library-tab"} primary="Songs" />
+                </ListItem>
+            </div>
+            <div className="list" >
+                {view === "albums" && savedAlbums !== undefined && savedAlbums.length > 0 && savedAlbums.map(each =>
+                    <AlbumCard title={each.get("albumName")} subtitle={each.get("artistNames")}
+                        artistIds={each.get("artistIds")} albumId={each.get("albumId")} imgSrc={each.get("albumImg")}
+                    />)}
+                {view === "artists" && savedArtists !== undefined && savedArtists.length > 0 && savedArtists.map(each =>
+                    <ArtistCard title={each.get("artistName")} round={true}
+                        subtitle="Artist" artistId={each.get("artistId")} imgSrc={each.get("artistImg")} />)}
+                {view === "songs" &&
+                    <SavedTracks />
+                }
             </div>
         </div>
     )
