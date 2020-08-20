@@ -1,11 +1,10 @@
 import { all, select, takeLatest, fork, put } from 'redux-saga/effects';
 import { PLAY_PREVIOUS_SONG, PLAY_NEXT_SONG, PLAY_SONG, play } from "./Actions"
 import { UPDATE_PLAYING_TRACKS } from "../track/Actions"
-import { getPlayingTracks } from "../track/Selectors"
-import {getPlayingTrack} from "./Selectors"
+import {getPlayingTracks, getPlayingTrack} from "../Selectors"
 
 export function* updateplay() {
-    put(UPDATE_PLAYING_TRACKS)
+    yield put(UPDATE_PLAYING_TRACKS)
 }
 
 export function* playPreviousSong() {

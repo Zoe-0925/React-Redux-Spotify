@@ -28,6 +28,7 @@ const LibraryReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_LIBRARY_PAGE:
             newState.set("libraryLoaded", true)
+            return newState
         case SAVE_TO_SAVED_ALBUMS:
             newState.set(SAVED_ALBUMS, action.albumIds)
             return newState

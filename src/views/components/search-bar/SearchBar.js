@@ -1,18 +1,18 @@
 import React, { useState } from "react";
+import {useSelector} from "react-redux"
 import { createArtistFromList, createTracksForAlbum, createPlaylist,createAlbumFromData } from "../../../core/utils/Utils"
-import { store } from "../../../index"
 import { throttle } from "lodash"
 import { fetchSearchResults } from "../../../core/api/api-calls"
+import { getToken } from "../../../core/Selectors";
 
 export default function SearchBar(props) {
     const [query, setQuery] = useState("")
-    const storeState = store.getState()
     const handleInputDebounce = throttle(handleChange, 1000)
+    const token = useSelector(getToken)
 
     async function handleChange(e) {
         let newQuery = encodeURI(e.target.value)
         setQuery(encodeURI(e.target.value))
-        const token = storeState.UserReducer.accessToken
         const data = await fetchSearchResults(token, newQuery)
         if(data!== undefined && data.tracks!== undefined && data.artists!== undefined
             && data.playlists!== undefined && data.albums!== undefined){

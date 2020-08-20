@@ -1,31 +1,24 @@
 import React, { useCallback } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useDispatch } from "react-redux"
+import history from "../../../core/history"
 import { fetchArtistsAlbumsLoading } from "../../../core/artist/Actions"
 import { fetchAlbumTracksLoading } from "../../../core/track/Actions"
 import { ReactComponent as PlayIcon } from '../../../svgs/play.svg'
 import PropTypes from 'prop-types';
 
-
-
 export default function AlbumCard(props) {
     const dispatch = useDispatch()
 
-    const fetchTracks = useCallback(
-        () => dispatch(fetchAlbumTracksLoading(props.albumId)
-        ), [dispatch]
-    )
-
-    const goToAlbumPage = () => {
-        props.goToAlbumPage()
-        fetchTracks()
-    }
+    const fetchTracks = useCallback(() => {
+        dispatch(fetchAlbumTracksLoading(props.albumId))
+        history.push("/albums")
+    }, [dispatch])
 
     const handleArtistClick = (e) => {
         const index = props.subtitle.indexOf(e.target.id)
-        const artistId = props.artistIds[index]
-        fetchArtists(artistId)
-        props.goToArtistpage()
+        fetchArtists(props.artistIds[index])
+        history.push("/artists/")
     }
 
     const fetchArtists = useCallback(
@@ -36,18 +29,18 @@ export default function AlbumCard(props) {
 
     return (
         <div className="card" key={uuidv4()}>
-            <div className="card-img" onClick={goToAlbumPage}>
-                <img src={props.imgSrc} alt="track-card" key={uuidv4()} />
-            </div>
+            <img src={props.imgSrc} alt="track-card" key={uuidv4()} onClick={fetchTracks} />
             <div className="cardContent">
-                <p className="fetchTracks" onClick={goToAlbumPage} >{props.title}</p>
+                <p className="card-title" onClick={fetchTracks}>{props.title}</p>
                 <span>
-                    {props.subtitle.map(each => <p className="fetchArtist" onClick={handleArtistClick} key={each} id={each}>{each}</p>)}
+                    {props.subtitle.map(each =>
+                        <p className="card-subtitle" onClick={handleArtistClick} key={each} id={each}>{each}</p>)}
                 </span>
             </div>
             <span className="playIcon">
                 <PlayIcon />
             </span>
+
         </div>
     )
 }

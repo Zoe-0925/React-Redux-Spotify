@@ -45,38 +45,6 @@ export const findArtistsById = (artists, artistId) => {
     return result
 }
 
-//divide a list item in rows where each row contains 6 items
-export function formatRowDisplay(list) {
-    let result = list.map((item) => {
-        var i = list.indexOf(item)
-        if (i % 6 === 0) { // create a new bootstrap <Row>
-            return (
-                <div className="row" style={{ display: "flex", textAlign: "center" }}>
-                    <div className="item">
-                        {list[i]}
-                    </div>
-                    <div className="item">
-                        {list[i + 1] && list[i + 1]}
-                    </div>
-                    <div className="item">
-                        {list[i + 2] && list[i + 2]}
-                    </div>
-                    <div className="item">
-                        {list[i + 3] && list[i + 3]}
-                    </div>
-                    <div className="item">
-                        {list[i + 4] && list[i + 4]}
-                    </div>
-                    <div className="item">
-                        {list[i + 5] && list[i + 5]}
-                    </div>
-                </div>
-            )
-        }
-    })
-    return result
-}
-
 export function removeDuplicates(list) {
     let result = []
     let trimmedIdList = Array.from(new Set(list.map(each => each.get("artistId"))))
@@ -164,10 +132,6 @@ export function createArtistFromList(data) {
             let url = each.images.length === 0 ? "" : each.images[0].url
             artists.push(createArtist(each.id, each.name, url))
         })
-    }
-    else { // data is not 
-        let url = data.images.length === 0 ? "" : data.images[0].url
-        artists.push(createArtist(data.id, data.name, url))
     }
     return artists
 }

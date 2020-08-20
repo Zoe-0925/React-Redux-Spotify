@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import SearchBar from "../components/search-bar/SearchBar"
 import AlbumCard from "../components/track-card/AlbumCard"
 import ArtistCard from "../components/track-card/ArtistCard"
-import TracklistItemNew from "../components/track-card/TracklistItemNew"
+import TracklistItemNew from "../components/track-card/TracklistItem"
 import { store } from "../../index"
-import { getTrackToToggle } from "../../core/library/Selectors"
+import { getTrackToToggle } from "../../core/Selectors"
 import { v4 as uuidv4 } from 'uuid';
 
 export default function Searchpage() {
@@ -14,6 +14,7 @@ export default function Searchpage() {
     const [albums, setAlbums] = useState([])
     const [playlists, setPlaylists] = useState([])
     const [trackSaved, setTrackSaved] = useState([])
+    const [notFound, setNotFound] = useState(false)
 
     const storeState = store.getState()
 
@@ -42,6 +43,7 @@ export default function Searchpage() {
         <div className="Searchpage">
             <div className="SearchResults">
                 <SearchBar found={handleResult} onErr={displayError} />
+                {notFound && <p className="not-found-message">We could not find any result.</p>}
                 {showResults &&
                     <div className="tracks">
                         <p className="title"> Songs</p>

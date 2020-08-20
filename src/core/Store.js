@@ -20,9 +20,13 @@ export default function configureStore() {
 
   if (module.hot) {
     module.hot.accept('./RootReducer', () => {
-      store.replaceReducer(require('./RootReducer').default);
+        // Webpack 1.0 without router-redux bind: store.replaceReducer(require('./RootReducer').default);
+        // Webpack 2.0 with router-redux bind:  store.replaceReducer(rootReducer(history))
+        // Webpack 1.0 with router-redux bind (as below): 
+        const nextRootReducer = require('./RootReducer').default
+        store.replaceReducer(nextRootReducer)
     });
-  }
+}
 
   return store;
 }

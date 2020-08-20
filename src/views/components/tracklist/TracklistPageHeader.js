@@ -15,11 +15,11 @@ export default function TracklistPageHeader(props) {
                 </div>
 
                 <div className="playlistPageContent">
-                    <p className="smallText uppercase bold" style={{ color: "white" }}>{props.title}</p>
-                    <h1 style={{ color: "white", fontSize: "40px" }}>{props.albumName}</h1>
+                    <p className="smallText uppercase bold">{props.title}</p>
+                    <h1>{props.albumName}</h1>
 
                     <div className="playlistPageDesc">
-                        <p className="spotify" style={{ color: "white" }}>{props.artistName}</p>
+                        <p className="spotify">{props.artistName}</p>
                     </div>
                 </div>
             </div>

@@ -5,12 +5,9 @@ import {
 } from "../api/api-calls"
 
 import {
-    getTrackIdAndIndex,
-    getTrackToToggle, getArtistToToggle, getAlbumToToggle, getPlaylistToToggle,
-} from "./Selectors"
-import { getToken } from "../user/Selectors"
-import { getCurrentAlbumId } from "../album/Selectors"
-
+    getTrackIdAndIndex,getArtistToToggle, getAlbumToToggle, getPlaylistToToggle,
+    getCurrentAlbumId ,getToken
+} from "../Selectors"
 import {
     LOAD_LIBRARY_PAGE, FETCH_TOGGLE_ALBUM_SAVED_LOADING,
     LOAD_NEXT_TRACKS, toggleTrack, toggleAlbum, toggleArtist, togglePlaylist

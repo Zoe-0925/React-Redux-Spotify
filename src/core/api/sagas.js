@@ -16,10 +16,10 @@ import {
     saveArtists, fetchArtistsAlbumsSuccessful, saveRelatedArtists
 } from "../artist/Actions"
 
-import { findAlbumById, getCurrentAlbumId , getCurrentAlbumTracks} from "../album/Selectors"
-import { getTrackIds } from "../track/Selectors"
-import { getCurrentArtistId, findArtistById } from "../artist/Selectors"
-import { getToken } from "../user/Selectors"
+import {
+    getTrackIds, getToken, getCurrentArtistId, findArtistById,
+    findAlbumById, getCurrentAlbumId, getCurrentAlbumTracks
+} from "../Selectors"
 
 import history from "../history"
 import { store } from "../../index"
@@ -39,6 +39,8 @@ export function* fetchHomePage() {
         yield select(getToken)
     }
     const token = yield select(getToken)
+    localStorage.setItem("token", token)
+    localStorage.setItem("expires_at", JSON.stringify(new Date()))
     try {
         const [data1, data2, data3] = yield all([
             call(fetchRecentPlayed, token),
@@ -64,11 +66,7 @@ export function* fetchHomePage() {
     }
 }
 
-export function* checkArtistSaved() {
-    const token = yield select(getToken)
-    while (select(getCurrentArtistId) === undefined || "") {
-        yield select(getCurrentArtistId)
-    }
+export function* checkArtistSaved(token) {
     const currentArtistId = yield select(getCurrentArtistId)
     const artistSaved = yield checkFollowArtist(token, currentArtistId)
     yield put(updateCurrentArtistSaved(artistSaved))
@@ -80,8 +78,9 @@ export function* fetchAlbumPage() {
     while (select(getCurrentAlbumId) === undefined || "") {
         yield select(getCurrentAlbumId)
     }
+    console.log("token from fetchAlbumPage", token)
     const currentAlbumId = yield select(getCurrentAlbumId)
-    let albumsFromStore = findAlbumById(store.getState(), currentAlbumId)
+    let albumsFromStore = yield select(findAlbumById(currentAlbumId))
     try {
         if (albumsFromStore === undefined) {
             const [data1, data2] = yield all([
@@ -111,7 +110,7 @@ export function* fetchAlbumPage() {
     } catch (err) {
         console.log(err)
     } finally {
-       // yield history.push("/Album")
+        // yield history.push("/Album")
     }
 }
 
@@ -144,7 +143,7 @@ export function* fetchArtistPage() {
         yield select(getCurrentArtistId)
     }
     const currentArtistId = yield select(getCurrentArtistId)
-    let artistsFromStore = findArtistById(store.getState(), currentArtistId)
+    let artistsFromStore = yield select(findArtistById(currentArtistId))
     try {
         let artistExist = artistsFromStore === undefined ? false : true
         let relatedArtistsExist = artistsFromStore.get("relatedArtists").length > 0 ? true : false
@@ -162,7 +161,7 @@ export function* fetchArtistPage() {
                 put(saveAlbums(albums2.singles)),
                 put(fetchArtistsAlbumsSuccessful(albums2)),
                 put(saveRelatedArtists(relatedArtists2)),
-                call(checkArtistSaved, token)  //TODO this guy is not written yet
+                call(checkArtistSaved, token)
             ])
         }
         if (!artistExist && !relatedArtistsExist && !saveSatusChecked && !albumsExist) {
@@ -182,7 +181,7 @@ export function* fetchArtistPage() {
                 put(saveArtists([artist1])),
                 put(fetchArtistsAlbumsSuccessful(albums1)),
                 put(saveRelatedArtists(relatedArtists1)),
-                call(checkArtistSaved, token)  //TODO this guy is not written yet
+                call(checkArtistSaved, token)
             ])
         }
 
@@ -190,7 +189,7 @@ export function* fetchArtistPage() {
         console.log(err)
         //yield take(FETCH_FAILED)
     } finally {
-       // yield history.push("/Artist")
+        // yield history.push("/Artist")
     }
 }
 

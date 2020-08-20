@@ -4,22 +4,21 @@ import { useDispatch } from "react-redux"
 import { fetchArtistsAlbumsLoading } from "../../../core/artist/Actions"
 import { ReactComponent as PlayIcon } from '../../../svgs/play.svg'
 import PropTypes from 'prop-types';
+import history from "../../../core/history"
 
 export default function ArtistCard(props) {
     const dispatch = useDispatch()
 
-    const handleClick = () => {
-        fetchArtists()
-    }
-
     const fetchArtists = useCallback(
-        () =>
-            dispatch(fetchArtistsAlbumsLoading(props.artistId)
-            ), [dispatch]
+        () => {
+            dispatch(fetchArtistsAlbumsLoading(props.artistId))
+            history.push("/artists")
+        },
+        [dispatch],
     )
 
     return (
-        <div className="card" key={uuidv4()} onClick={handleClick}>
+        <div className="card" key={uuidv4()} onClick={fetchArtists}>
             <div className="artist-card-image">
                 <img src={props.imgSrc} alt="track-card" key={uuidv4()}
                 />

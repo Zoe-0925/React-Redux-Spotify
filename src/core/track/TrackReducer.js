@@ -28,6 +28,7 @@ const TrackReducer = (state = initialEntity, action) => {
             return newMap
         case UPDATE_PLAYING_TRACKS:
             newMap.set("currentPlayingTracks", newMap.get("currentDisplayTracks"))
+            return newMap
         default:
             return state;
     }

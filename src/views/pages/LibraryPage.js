@@ -1,13 +1,12 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux"
-import SideMenu from "../components/side-menu/SideMenu"
 import { loadLibraryPage } from "../../core/library/Actions"
 import { SAVED_ALBUMS, SAVED_ARTISTS, SAVED_TRACKS } from "../../core/Constants"
 import AlbumCard from "../components/track-card/AlbumCard"
 import ArtistCard from "../components/track-card/ArtistCard"
 import SavedTracks from "../components/tracklist/SavedTracks"
 
-export default function LibraryPage(props) {
+export default function LibraryPage() {
     const [view, setView] = useState("albums")
     const libraryReducer = useSelector(state => state.LibraryReducer)
     const savedAlbums = libraryReducer.get(SAVED_ALBUMS)
@@ -51,14 +50,13 @@ export default function LibraryPage(props) {
 
                 {view === "albums" && <div className="contents" >
                     {savedAlbums !== undefined && savedAlbums.length > 0 && savedAlbums.map(each =>
-                        <AlbumCard title={each.get("albumName")} subtitle={each.get("artistNames")} goToAlbumPage={props.goToAlbumpage}
-                            goToArtistpage={props.goToArtistpage}
+                        <AlbumCard title={each.get("albumName")} subtitle={each.get("artistNames")} 
                             artistIds={each.get("artistIds")} albumId={each.get("albumId")} imgSrc={each.get("albumImg")}
                         />)}
                 </div>}
                 {view === "artists" && <div className="contents">
                     {savedArtists !== undefined && savedArtists.length > 0 && savedArtists.map(each =>
-                        <ArtistCard title={each.get("artistName")} goToArtistpage={props.goToArtistpage}
+                        <ArtistCard title={each.get("artistName")}
                             subtitle="Artist" artistId={each.get("artistId")} imgSrc={each.get("artistImg")} />)}
                 </div>}
                 {view === "songs" && <SavedTracks />}

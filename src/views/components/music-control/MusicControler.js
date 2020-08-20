@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, {  useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from "react-redux"
 import { resume, pause, next, previous } from "../../../core/player/Actions"
 import ReactAudioPlayer from 'react-audio-player';
 import { Icon } from 'semantic-ui-react'
+import {getPlayingTrack} from "../../../core/Selectors"
 import 'semantic-ui-css/semantic.min.css';
 
 let initialEntity = new Map()
@@ -10,21 +11,7 @@ initialEntity.set("currentTrack", "")  //a track object
 initialEntity.set("cursor", "")  //previous track, next track //Inside the tracks are objects of {albumId:"", tracks:[]})
 
 export default function MusicControl() {
-    const [audioSrc, setAudioSrc] = useState("")
-    const [trackName, setTrackName]= useState("")
-    const [artistName, setArtistNName]= useState("")
-
-    const playerReducer = useSelector(state => state.PlayerReducer)
-
-    useEffect(() => {
-        let currentTrack = playerReducer.get("currentTrack")
-        console.log("current track",  currentTrack)
-        if (currentTrack !== "" && currentTrack !== undefined) {
-            setAudioSrc(currentTrack.get("url"))
-            setTrackName(currentTrack.get("name"))
-            setArtistNName(currentTrack.get("artists").join(","))
-        }
-    }, [playerReducer])
+    const currentTrack = useSelector(getPlayingTrack)
 
     const dispatch = useDispatch()
 
@@ -47,10 +34,10 @@ export default function MusicControl() {
     )
 
     return (
-        <div className='song-player-container' style={{ color: "black" }}>
+        <div className='song-player-container musicControls'>
             <div className='song-details'>
-                <p className='song-name'>{trackName}</p>
-                <p className='artist-name'>{artistName}</p>
+                <p className='song-name'>{currentTrack!==(""||undefined)?currentTrack.get("name"):""}</p>
+                <p className='artist-name'>{currentTrack!==(""||undefined)?currentTrack.get("artists").join(","):""}</p>
             </div>
             <div className='song-controls'>
 
@@ -63,7 +50,7 @@ export default function MusicControl() {
                     <Icon name='step forward' size='large' onClick={playNextTrack}
                         className="icon" aria-hidden="true" />
                 </div>
-                <ReactAudioPlayer controls={true} src={audioSrc} onEnded={playNextTrack}
+                <ReactAudioPlayer controls={true} src={currentTrack!==(""||undefined)?currentTrack.get("url"):""} onEnded={playNextTrack}
                 />
             </div>
 

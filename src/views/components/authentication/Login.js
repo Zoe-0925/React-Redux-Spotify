@@ -16,6 +16,12 @@ export default function Login() {
     )
 
     useEffect(() => {
+    //    const tokenFromStorage = localStorage.getItem("token")
+   //     const expires_at = localStorage.getItem("expires_at")
+
+    }, [])
+
+    useEffect(() => {
         //save the token to the redux store
         let newToken = retrieveAccessToken(window.location.href)
         if (newToken !== "" && newToken !== undefined) {
@@ -24,6 +30,6 @@ export default function Login() {
     }, [window.location.href]);
 
     return (
-        <Button className="Login" href={url} style={{height:"40px", color:"black", backgroundColor:"white"}} > Log in to Spotify</Button>
+        <Button className="Login" href={url} style={{color:"white"}}> Log in to Spotify</Button>
     );
 }

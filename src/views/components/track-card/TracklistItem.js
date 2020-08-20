@@ -8,6 +8,7 @@ import { play, pause } from '../../../core/player/Actions';
 import PropTypes from 'prop-types';
 import { toggleTrack } from "../../../core/library/Actions"
 import { Icon } from 'semantic-ui-react'
+import history from "../../../core/history"
 import 'semantic-ui-css/semantic.min.css';
 
 export default function TracklistItemNew(props) {
@@ -27,11 +28,12 @@ export default function TracklistItemNew(props) {
         }, [dispatch]
     )
 
+    //TODO debug
     function handleClickArtist(e) {
         const artistId = e.target.id
         if (artistId !== undefined || "") {
             fetchAlbumsForArtist(e.target.id)
-            props.goToAlrtistpage()
+            history.push("/artists")
         }
     }
 

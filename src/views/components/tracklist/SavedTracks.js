@@ -1,9 +1,9 @@
 import React, { useRef, useState, useCallback, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import useBookSearch from "../../../core/track/UseLoadTracks"
-import TracklistItemNew from "../../components/track-card/TracklistItemNew"
+import TracklistItemNew from "../track-card/TracklistItem"
 import { store } from "../../../index"
-import { getTrackToToggle } from "../../../core/library/Selectors"
+import { getTrackToToggle } from "../../../core/Selectors"
 
 export default function SavedTracks() {
     const [pageNumber, setPageNumber] = useState(1)
