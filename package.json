@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^7.1.2",
     "babel-jest": "^24.9.0",
     "date-fns": "^2.15.0",
+    "fetch-mock": "^9.10.7",
     "immutable": "^4.0.0-rc.12",
     "lodash": "^4.17.20",
     "node-sass": "^4.14.1",

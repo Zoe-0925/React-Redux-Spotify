@@ -1,4 +1,5 @@
 import { call, take, all, select, takeLatest, fork, put } from 'redux-saga/effects';
+import { addHours } from 'date-fns'
 import {
     fetchArtistById, fetchArtistsAlbums, fetchAlbumById, fetchSavedAlbums, fetchSavedArtists, fetchSavedTracks,
     fetchRelatedArtists, fetchRecentPlayed, fetchUsersTopTracks, fetchUsersTopTwoArtists, fetchTracksForAlbum, fetchArtistsTopTracks,
@@ -22,13 +23,12 @@ import {
 } from "../Selectors"
 
 import history from "../history"
-import { store } from "../../index"
 import {
     LOAD_LIBRARY_PAGE, toggleAlbum, toggleTrack, toggleArtist,
 } from "../library/Actions"
 
 import {
-    createArtistFromList, createTracksFromList, createTracksForAlbum,
+    createArtistFromList, createTracksForAlbum,
     createAlbumFromData, createAlbumsForAnArtist, createSavedAlbums, createRecentPlayed, createTopTracksForArtist,
     createUsersTopTracks, createTop2Artists
 } from "../utils/Utils"
@@ -39,8 +39,9 @@ export function* fetchHomePage() {
         yield select(getToken)
     }
     const token = yield select(getToken)
-    localStorage.setItem("token", token)
-    localStorage.setItem("expires_at", JSON.stringify(new Date()))
+    //localStorage.setItem("token", token)
+    // const now = addHours(new Date(), 1)
+    // localStorage.setItem("expires_at", JSON.stringify(now))
     try {
         const [data1, data2, data3] = yield all([
             call(fetchRecentPlayed, token),
@@ -78,7 +79,6 @@ export function* fetchAlbumPage() {
     while (select(getCurrentAlbumId) === undefined || "") {
         yield select(getCurrentAlbumId)
     }
-    console.log("token from fetchAlbumPage", token)
     const currentAlbumId = yield select(getCurrentAlbumId)
     let albumsFromStore = yield select(findAlbumById(currentAlbumId))
     try {
