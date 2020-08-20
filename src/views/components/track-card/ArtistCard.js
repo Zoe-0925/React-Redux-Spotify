@@ -2,7 +2,6 @@ import React, { useCallback } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useDispatch } from "react-redux"
 import { fetchArtistsAlbumsLoading } from "../../../core/artist/Actions"
-import { ReactComponent as PlayIcon } from '../../../svgs/play.svg'
 import PropTypes from 'prop-types';
 import history from "../../../core/history"
 
@@ -28,9 +27,6 @@ export default function ArtistCard(props) {
                 <span>{props.subtitle}</span>
 
             </div>
-            <span className="playIcon">
-                <PlayIcon />
-            </span>
         </div>
     )
 }

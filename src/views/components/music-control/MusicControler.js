@@ -1,10 +1,10 @@
-import React, {  useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from "react-redux"
 import { resume, pause, next, previous } from "../../../core/player/Actions"
 import ReactAudioPlayer from 'react-audio-player';
-import { Icon } from 'semantic-ui-react'
-import {getPlayingTrack} from "../../../core/Selectors"
-import 'semantic-ui-css/semantic.min.css';
+import SkipNextIcon from '@material-ui/icons/SkipNext';
+import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
+import { getPlayingTrack } from "../../../core/Selectors"
 
 let initialEntity = new Map()
 initialEntity.set("currentTrack", "")  //a track object
@@ -17,7 +17,7 @@ export default function MusicControl() {
 
     const playNextTrack = useCallback(
         () => {
-            if (playerReducer.get("currentTrack")!== "") {
+            if (playerReducer.get("currentTrack") !== "") {
                 dispatch(next())
             }
         },
@@ -36,22 +36,14 @@ export default function MusicControl() {
     return (
         <div className='song-player-container musicControls'>
             <div className='song-details'>
-                <p className='song-name'>{currentTrack!==(""||undefined)?currentTrack.get("name"):""}</p>
-                <p className='artist-name'>{currentTrack!==(""||undefined)?currentTrack.get("artists").join(","):""}</p>
+                <p className='song-name'>{currentTrack !== ("" || undefined) ? currentTrack.get("name") : ""}</p>
+                <p className='artist-name'>{currentTrack !== ("" || undefined) ? currentTrack.get("artists").join(",") : ""}</p>
             </div>
             <div className='song-controls'>
-
-                <div className='reverse-song'>
-                    <i className="fa fa-step-backward reverse" aria-hidden="true" />
-                    <Icon name='step backward' size='large' onClick={playPreviousTrack}
-                        className="icon" aria-hidden="true" />
-                </div>
-                <div className='next-song'>
-                    <Icon name='step forward' size='large' onClick={playNextTrack}
-                        className="icon" aria-hidden="true" />
-                </div>
-                <ReactAudioPlayer controls={true} src={currentTrack!==(""||undefined)?currentTrack.get("url"):""} onEnded={playNextTrack}
-                />
+                <SkipPreviousIcon className='reverse-song' font-size="inherit" onClick={playPreviousTrack} />
+                <ReactAudioPlayer controls={true} src={currentTrack !== ("" || undefined) ? currentTrack.get("url") : ""} 
+                onEnded={playNextTrack}/>
+                  <SkipNextIcon font-size="inherit" className="next-song icon" aria-hidden="true" onClick={playNextTrack} />
             </div>
 
             <div className='song-progress-container'>

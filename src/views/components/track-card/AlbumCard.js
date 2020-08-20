@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux"
 import history from "../../../core/history"
 import { fetchArtistsAlbumsLoading } from "../../../core/artist/Actions"
 import { fetchAlbumTracksLoading } from "../../../core/track/Actions"
-import { ReactComponent as PlayIcon } from '../../../svgs/play.svg'
 import PropTypes from 'prop-types';
 
 export default function AlbumCard(props) {
@@ -37,9 +36,6 @@ export default function AlbumCard(props) {
                         <p className="card-subtitle" onClick={handleArtistClick} key={each} id={each}>{each}</p>)}
                 </span>
             </div>
-            <span className="playIcon">
-                <PlayIcon />
-            </span>
 
         </div>
     )

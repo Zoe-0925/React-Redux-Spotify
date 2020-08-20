@@ -4,12 +4,12 @@ import { useDispatch } from "react-redux"
 import { fetchArtistsAlbumsLoading } from "../../../core/artist/Actions"
 import { ReactComponent as PlayIcon } from '../../../svgs/play.svg'
 import { ReactComponent as NoteIcon } from '../../../svgs/note.svg'
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import { play, pause } from '../../../core/player/Actions';
 import PropTypes from 'prop-types';
 import { toggleTrack } from "../../../core/library/Actions"
-import { Icon } from 'semantic-ui-react'
 import history from "../../../core/history"
-import 'semantic-ui-css/semantic.min.css';
 
 export default function TracklistItem(props) {
     const [saved, setSaved] = useState(props.saved)
@@ -80,15 +80,8 @@ export default function TracklistItem(props) {
             </div>
             <div className="songTime">
                 <span>
-                    {!saved &&
-                        <div className="icon iconsHeart" onClick={toggleSave}>
-                            <Icon name='heart outline' className="coloredIcon" size='small' />
-                        </div>}
-                    {saved &&
-                        <div className="icon iconsHeart" onClick={toggleSave}>
-                            <Icon name='heart' className="coloredIcon" size='small' />
-                        </div>
-                    }</span>
+                    {!saved && <FavoriteBorderIcon className="icon iconsHeart" font-size="inherit" onClick={toggleSave} />}
+                    {saved && <FavoriteIcon className="icon iconsHeart" font-size="inherit" onClick={toggleSave} />}</span>
                 <span>{props.current.get("duration")}</span>
             </div>
         </li>
