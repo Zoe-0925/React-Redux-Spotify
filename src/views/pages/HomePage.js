@@ -8,9 +8,6 @@ export default function Homepage() {
         const recentlyPlayedAlbumIds = useSelector(getRecentlyPlayed)
         const userTopAlbumIds = useSelector(getUserTopTracks)
 
-        console.log("homepage", recentlyPlayedAlbumIds)
-        console.log(userTopAlbumIds)
-
         /**
          *   if (albums.length === 0 && libraryReducer.get(USERS_TOP_TRACKS).length === 0) {
                         //get the token from the local storage, and save the token, and init home page

@@ -16,18 +16,13 @@ export default function ArtistPage() {
     let saved = useSelector(getCurrentArtistSaved)
     let relatedArtists = useSelector(getRelatedArtists)
     const albums = useSelector(getCurrentArtistsAlbums)
-    const token = useSelector(getToken)
 
     const img = currentArtist !== undefined && currentArtist.get("artistImg") === undefined ? "" : currentArtist.get("artistImg")
 
     const { fetchTracks, fetchArtistPage } = useDispatchArtistPage()
 
 
-    useEffect(() => {
-        if (token === "") {
-            history.push("/")
-        }
-    }, [])
+  
 
     if (albums.albums === undefined || albums.singles === undefined || relatedArtists === undefined) {
         return <div className="ArtistPage"></div>

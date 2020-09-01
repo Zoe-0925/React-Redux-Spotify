@@ -10,7 +10,7 @@ let initialEntity = new Map()
 initialEntity.set("currentTrack", "")  //a track object
 initialEntity.set("cursor", "")  //previous track, next track //Inside the tracks are objects of {albumId:"", tracks:[]})
 
-export default function MusicControl() {
+export default function MusicControl({hide}) {
     const currentTrack = useSelector(getPlayingTrack)
 
     const dispatch = useDispatch()
@@ -35,7 +35,7 @@ export default function MusicControl() {
     )
 
     return (
-        <div className='song-player-container musicControls'>
+        <div className={!hide?'musicControls':'hide'}>
             <div className='song-details'>
                 <p className='song-name'>{currentTrack !== ("" || undefined) ? currentTrack.get("name") : ""}</p>
                 <p className='artist-name'>{currentTrack !== ("" || undefined) ? currentTrack.get("artists").join(",") : ""}</p>

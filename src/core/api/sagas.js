@@ -38,9 +38,6 @@ export function* fetchHomePage() {
         yield select(getToken)
     }
     const token = yield select(getToken)
-    //localStorage.setItem("token", token)
-    // const now = addHours(new Date(), 1)
-    // localStorage.setItem("expires_at", JSON.stringify(now))
     try {
         const [data1, data2, data3] = yield all([
             call(fetchRecentPlayed, token),
