@@ -4,44 +4,41 @@ import {
 
 const { Map } = require('immutable');
 
-//TODO buggy buggy buggy!!!!!
-
 let initialEntity = new Map()
 initialEntity.set("currentTrack", "")  //a track object
 initialEntity.set("songPaused", true)
 initialEntity.set("songPlaying", false)
-initialEntity.set("cursor", "")  //previous track, next track
+initialEntity.set("timeElapsed", 0)
+initialEntity.set("songId", 0)
 
 const PlayerReducer = (state = initialEntity, action) => {
-
+    let newMap = new Map()
     switch (action.type) {
+        case "FETCH_SONGS_SUCCESS":
+            newMap.set("songs", action.songs)
         case PLAY_SONG:
-            let newMap = new Map()
             newMap.set("songPlaying", true)
             newMap.set("songPaused", false)
             newMap.set("currentTrack", action.current)
-            const cursor = {
-                previous: action.previous,
-                next: action.next
-            }
-            newMap.set("cursor", cursor)
-            console.log("new map", newMap)
+            newMap.set("songDetails", action.song)
+            newMap.set("songId", action.song.id)
+            newMap.set("timeElapsed", 0)
             return newMap
-
-        //for next and previous song, 
-        //call the saga and saga manages the cursor and put PLAY_SONG
-
-        //    case STOP_SONG:
-        // newMap.set("currentTrack", "")
-        //   newMap.set("songPlaying", false)
-        //   newMap.set("songPaused", true)
-        //   return newMap
-        //    case PAUSE_SONG: //songPlaying is true
-        //      newMap.set("songPaused", true)
-        //      return newMap
-        //  case RESUME_SONG:
-        //     newMap.set("songPaused", false)
-        //    return newMap
+        case STOP_SONG:
+            newMap.set("songPlaying", false)
+            newMap.set("songPaused", true)
+            newMap.set("songDetails", null)
+            newMap.set("timeElapsed", 0)
+            return newMap
+        case PAUSE_SONG:
+            newMap.set("songPaused", true)
+            return newMap
+        case RESUME_SONG:
+            newMap.set("songPaused", false)
+            return newMap
+        case "INCREASE_SONG_TIME":
+            newMap.set("timeElapsed", action.time)
+            return newMap
         default:
             return state;
     }
