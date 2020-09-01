@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/React-Redux-Spotify/static/css/main.00ee6af9.chunk.css",
+    "main.js": "/React-Redux-Spotify/static/js/main.f9de4cdc.chunk.js",
+    "main.js.map": "/React-Redux-Spotify/static/js/main.f9de4cdc.chunk.js.map",
+    "runtime-main.js": "/React-Redux-Spotify/static/js/runtime-main.91525e63.js",
+    "runtime-main.js.map": "/React-Redux-Spotify/static/js/runtime-main.91525e63.js.map",
+    "static/js/2.4c5324b7.chunk.js": "/React-Redux-Spotify/static/js/2.4c5324b7.chunk.js",
+    "static/js/2.4c5324b7.chunk.js.map": "/React-Redux-Spotify/static/js/2.4c5324b7.chunk.js.map",
+    "index.html": "/React-Redux-Spotify/index.html",
+    "precache-manifest.2ae331c5393738d1b45684b890c84596.js": "/React-Redux-Spotify/precache-manifest.2ae331c5393738d1b45684b890c84596.js",
+    "service-worker.js": "/React-Redux-Spotify/service-worker.js",
+    "static/css/main.00ee6af9.chunk.css.map": "/React-Redux-Spotify/static/css/main.00ee6af9.chunk.css.map",
+    "static/js/2.4c5324b7.chunk.js.LICENSE.txt": "/React-Redux-Spotify/static/js/2.4c5324b7.chunk.js.LICENSE.txt",
+    "static/media/App.scss": "/React-Redux-Spotify/static/media/CircularStd-Book.6365c40a.otf",
+    "static/media/note.ceeb8cd1.svg": "/React-Redux-Spotify/static/media/note.ceeb8cd1.svg",
+    "static/media/play.78b8b985.svg": "/React-Redux-Spotify/static/media/play.78b8b985.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.91525e63.js",
+    "static/js/2.4c5324b7.chunk.js",
+    "static/css/main.00ee6af9.chunk.css",
+    "static/js/main.f9de4cdc.chunk.js"
+  ]
+}
