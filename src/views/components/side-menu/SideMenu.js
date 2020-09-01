@@ -7,8 +7,6 @@ import LibraryMusicOutlinedIcon from '@material-ui/icons/LibraryMusicOutlined';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 
 export default function SideMenu() {
-    //TODO this side menu did not fetch data.
-    //So someone needs to do something...
 
     return (
         <div className="SideMenu">

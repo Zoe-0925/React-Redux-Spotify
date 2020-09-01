@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { hot } from 'react-hot-loader/root'
-import { Route, Switch } from 'react-router-dom';
+import { withRouter } from "react-router"
+import { Route, Switch, } from 'react-router-dom';
 import Homepage from "./views/pages/HomePage"
 import AlbumPage from "./views/pages/AlbumPage"
 import ArtistPage from "./views/pages/ArtistPage"
@@ -8,18 +9,20 @@ import SideMenu from "./views/components/side-menu/SideMenu"
 import LibraryPage from "./views/pages/LibraryPage"
 import SearchPage from "./views/pages/SearchPage"
 import MusicControl from "./views/components/music-control/MusicControler"
-import Login from "./views/components/authentication/Login"
+import Login from "./views/pages/Login"
 import './App.scss'
 
 const App = () => {
+  const [show, setShow] = useState(false)
+
   return (
-    <div className="outerWrap">
+    <div className= "outerWrap">
       <div className="App">
-        <div className="upperPart" >
-          <SideMenu />
-          <div className="main">
+        <div className={show ? "upperPart" : "full-screen"}>
+          {show && <SideMenu />}
+          <div className= "main">
             <Switch>
-              <Route path="/" exact component={Login} />
+              <Route path="/" exact component={() => <Login setShow={setShow} />} />
               <Route path="/Home" exact component={Homepage} />
               <Route path="/albums" exact component={AlbumPage} />
               <Route path="/artists" exact component={ArtistPage} />
@@ -30,7 +33,7 @@ const App = () => {
             </Switch>
           </div>
         </div>
-        <MusicControl />
+        {show && <MusicControl />}
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import {
-    retrieveAccessToken, findItemFromAList, removeDuplicateAlbums, createRequest,
-    convertToMin, findAlbumsById, findArtistsById, removeDuplicates, findItemFromAList, toUrlString,
+    retrieveAccessToken, createRequest,
+    convertToMin, findAlbumsById, findArtistsById,
     retrieveAccessToken
 } from "../Utils"
 const { Map } = require('immutable');
@@ -11,25 +11,6 @@ describe('retrieveAccessToken ', () => {
         const result = retrieveAccessToken(url)
         const expectedResult = "token"
         expect(result).toBe(expectedResult)
-    })
-})
-
-describe('findItemFromAList ', () => {
-    const result
-    it('returns the matching result', () => {
-        const id1 = "1"
-        const list1 = Map({ "query1": "1", "query2": "2", "query3": "3" })
-        const query1 = "query1"
-        result = findItemFromAList(id1, list1, query1)
-        expect(result).toBe({ "query1": "1" })
-    })
-
-    it('returns undefined if there is no matching result', () => {
-        const id2 = "1"
-        const list2 = Map({ "query3": "3" })
-        const query2 = "query2"
-        result = findItemFromAList(id2, list2, query2)
-        expect(result).toBe(undefined)
     })
 })
 

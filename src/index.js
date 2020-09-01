@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { Router } from 'react-router-dom';
+import { BrowserRouter as Router } from "react-router-dom";
+
 import RootReducer from "./core/RootReducer"
 import RootSaga from "./core/RootSaga"
 import { Provider } from 'react-redux'
@@ -19,8 +20,8 @@ sagaMiddleware.run(RootSaga);
 
 ReactDOM.render(
   <Provider store={store}>
-   <Router history={history}>
-    <App history={history} />
+    <Router basename='/' history={history}>
+      <App history={history} />
     </Router>
   </Provider>,
   document.getElementById('root')

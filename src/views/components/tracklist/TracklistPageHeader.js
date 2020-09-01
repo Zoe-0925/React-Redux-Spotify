@@ -2,10 +2,11 @@ import React, { Fragment } from 'react';
 import { ReactComponent as PlayIcon } from "../../../svgs/play.svg"
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import { ReactComponent as HeartIcon } from '../../../svgs/heart.svg'
 import PropTypes from 'prop-types';
 
 export default function TracklistPageHeader(props) {
+
+    const toggleSave = () => { }//TODO should be the from the props
 
     return (
         <Fragment>

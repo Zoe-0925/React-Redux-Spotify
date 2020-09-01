@@ -105,9 +105,11 @@ export const toUrlString = (txtList) => {
     return result
 }
 
+
 //Take in the url that is returned from Spotify and then get the access token
 export const retrieveAccessToken = url => {
     let result = ""
+    console.log("url", url)
     if (url !== undefined || "") {
         result = url.split("#")
     }
@@ -122,6 +124,8 @@ export const retrieveAccessToken = url => {
     return result
 
 }
+
+
 
 export function createArtistFromList(data) {
     let artists = []

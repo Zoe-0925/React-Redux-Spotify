@@ -18,7 +18,7 @@ export default function ArtistPage() {
     const albums = useSelector(getCurrentArtistsAlbums)
     const token = useSelector(getToken)
 
-    const img = currentArtist!==undefined && currentArtist.get("artistImg")===undefined? "":currentArtist.get("artistImg")
+    const img = currentArtist !== undefined && currentArtist.get("artistImg") === undefined ? "" : currentArtist.get("artistImg")
 
     const { fetchTracks, fetchArtistPage } = useDispatchArtistPage()
 
@@ -29,23 +29,13 @@ export default function ArtistPage() {
         }
     }, [])
 
-    let albumRows = ""
-    let singleRows = ""
-    let relatedRows = ""
-    if (albums.albums !== undefined && albums.singles !== undefined && relatedArtists !== undefined) {
-        albumRows = albums.albums.map(each =>
-            <ArtistTrackCard onClick={() => { fetchTracks }}
-                id={each.get("albumId")}
-                imgSrc={each.get("albumImg")} name={each.get("albumName")} />)
-        singleRows = albums.singles.map(each =>
-            <ArtistTrackCard onClick={() => { fetchTracks }}
-                id={each.get("albumId")}
-                imgSrc={each.get("albumImg")} name={each.get("albumName")} />)
-        relatedRows = relatedArtists.map(each =>
-            <ArtistTrackCard id={each.get("artistId")}
-                round={true} onClick={() => fetchArtistPage}
-                imgSrc={each.get("artistImg")} name={each.get("artistName")} />)
+    if (albums.albums === undefined || albums.singles === undefined || relatedArtists === undefined) {
+        return <div className="ArtistPage"></div>
     }
+
+
+
+
 
     return (
         <div className="ArtistPage">
@@ -54,15 +44,25 @@ export default function ArtistPage() {
                     key={uuidv4()} saved={saved} />}
             <h1>Albums</h1>
             <div className="list">
-                {albumRows}
+                {albums.albums.map(each => {
+                    return (<ArtistTrackCard onClick={fetchTracks}  id={each.get("albumId")}
+                        imgSrc={each.get("albumImg")} name={each.get("albumName")} />)
+                })}
             </div>
             <h1>Singles and EPs</h1>
             <div className="list">
-                {singleRows}
+                {albums.singles.map(each => {
+                    return (<ArtistTrackCard onClick={fetchTracks} id={each.get("albumId")}
+                        imgSrc={each.get("albumImg")} name={each.get("albumName")} />)
+                })}
             </div>
             <h1>Related Artists</h1>
             <div className="list">
-                {relatedRows}
+                {relatedArtists.map(each => {
+                    return (<ArtistTrackCard id={each.get("artistId")}
+                        round={true} onClick={() => fetchArtistPage}
+                        imgSrc={each.get("artistImg")} name={each.get("artistName")} />)
+                })}
             </div>
         </div>)
 }

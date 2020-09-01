@@ -15,20 +15,21 @@ export default function MusicControl() {
 
     const dispatch = useDispatch()
 
+
     const playNextTrack = useCallback(
         () => {
-            if (playerReducer.get("currentTrack") !== "") {
-                dispatch(next())
-            }
+            //if (playerReducer.get("currentTrack") !== "") {
+              //  dispatch(next())
+            //}
         },
         [dispatch],
     )
 
     const playPreviousTrack = useCallback(
         () => {
-            if (playerReducer.get("currentTrack") !== "") {
-                dispatch(previous())
-            }
+           // if (playerReducer.get("currentTrack") !== "") {
+            //    dispatch(previous())
+           // }
         },
         [dispatch],
     )

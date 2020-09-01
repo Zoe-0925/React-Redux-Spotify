@@ -36,8 +36,6 @@ export async function fetchUsersTopTwoArtists(token) {
     const response = await fetch(myRequest)
     const data = await response.json()
     return data.items;
-    //  createTop2Artists
-    // store.dispatch(saveArtists(artists))
 }
 
 
@@ -77,8 +75,6 @@ export async function fetchAlbumById(token, albumId) {
     const response = await fetch(myRequest)
     const data = await response.json()
     return data;
-    //createAlbumFromData
-    //  store.dispatch(saveAlbums([anAlbum]))
 }
 
 export async function fetchArtistById(token) {
@@ -125,9 +121,6 @@ export async function fetchSavedArtists(token) {
     const response = await fetch(myRequest)
     const data = await response.json()
     return data.artists.items;
-    //   createArtistFromList
-    //   store.dispatch(saveToSavedArtists(artists))
-    //  store.dispatch(saveArtists(artists))
 }
 
 export async function fetchSavedTracks(token) {
