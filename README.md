@@ -9,15 +9,14 @@ This is a spotify client built with React and Redux Saga.
 ## Demo: 
 
 
-## Tech Stack:
-###### React, Redux Saga, SCSS
+## Tech Stack:  React, Redux Saga, SCSS
 
 
-### Run the program locally: `npm start`
+##### Run the program locally: `npm start`
 
 Then open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-### Test:`npm test`
+##### Test:`npm test`
 
-### Build and Deploy: `npm build`
+##### Build and Deploy: `npm build`
 
