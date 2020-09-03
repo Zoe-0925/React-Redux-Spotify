@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect'
-import { RECENTLY_PLAYED, USERS_TOP_TRACKS, SAVED_ALBUMS, SAVED_ARTISTS} from "./Constants"
+import { RECENTLY_PLAYED, USERS_TOP_TRACKS, SAVED_ALBUMS, SAVED_ARTISTS } from "./Constants"
 
 export const getPlayerReducer = (state) => {
     return state.PlayerReducer
@@ -34,15 +34,9 @@ export const getTracks = createSelector(
     reducer => reducer.get("track")
 )
 
-
 export const getCurrentTracks = createSelector(
     getTrackReducer,
     reducer => reducer.get("currentDisplayTracks")
-)
-
-export const getPlayingTracks = createSelector(
-    getTrackReducer,
-    reducer => reducer.get("currentPlayingTracks")
 )
 
 export const getTrackIds = createSelector(
@@ -50,12 +44,45 @@ export const getTrackIds = createSelector(
     tracks => tracks.map(each => each.get("id"))
 )
 
+export const getTrackNameById = id => createSelector(
+    getCurrentTracks,
+    tracks => tracks.find(item => item.id === id).name
+)
+
+
+
 //------------- Player Reducer ------------//
 
 
 export const getPlayingTrack = createSelector(
     getPlayerReducer,
     playerReducer => playerReducer.get("currentTrack")
+)
+
+
+export const getSongPlaying = createSelector(
+    getPlayerReducer,
+    playerReducer => playerReducer.get("songPlaying")
+)
+
+export const getSongPaused = createSelector(
+    getPlayerReducer,
+    playerReducer => playerReducer.get("songPaused")
+)
+
+export const getTimeElapsed = createSelector(
+    getPlayerReducer,
+    playerReducer => playerReducer.get("timeElapsed")
+)
+
+export const getSongs = createSelector(
+    getPlayerReducer,
+    playerReducer => playerReducer.get("songs")
+)
+
+export const getSongDetails = createSelector(
+    getPlayerReducer,
+    playerReducer => playerReducer.get("songDetails")
 )
 
 //------------- Library Reducer ------------//
@@ -140,7 +167,7 @@ export const getRelatedArtists = createSelector(
 
 export const getCurrentArtistSaved = createSelector(
     getCurrentArtist,
-    artist => artist!==undefined && artist.get("saved")!==undefined?artist.get("saved"):false
+    artist => artist !== undefined && artist.get("saved") !== undefined ? artist.get("saved") : false
 )
 
 

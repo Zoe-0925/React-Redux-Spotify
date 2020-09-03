@@ -6,7 +6,6 @@ import {
 let initialEntity = new Map()
 initialEntity.set("track", []) //Inside the tracks are objects of {albumId:"", tracks:[]}
 initialEntity.set("currentDisplayTracks", [])
-initialEntity.set("currentPlayingTracks", [])
 
 const TrackReducer = (state = initialEntity, action) => {
     let newMap = new Map(state)

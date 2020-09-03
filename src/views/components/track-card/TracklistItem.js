@@ -39,6 +39,8 @@ export default function TracklistItem(props) {
 
     function playTrack() {
         setPlayIcon(false)
+        //TODO update
+        //to give a list and the current song id
         dispatchPlay(props.current, props.previous, props.next)
     }
 

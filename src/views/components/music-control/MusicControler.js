@@ -1,6 +1,5 @@
 import React, { useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from "react-redux"
-import { resume, pause, next, previous } from "../../../core/player/Actions"
 import ReactAudioPlayer from 'react-audio-player';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';

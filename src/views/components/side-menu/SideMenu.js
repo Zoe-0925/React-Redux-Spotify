@@ -11,10 +11,10 @@ export default function SideMenu() {
     return (
         <div className="SideMenu">
             <ListItem className="link" button onClick={() => history.push("/Home")}>
-                <ListItemIcon>
-                    <HomeOutlinedIcon className="nav-icon" fontSize='inherit' />
-                </ListItemIcon>
-                <ListItemText className="nav-item" primary="Home" />
+                    <ListItemIcon>
+                        <HomeOutlinedIcon className="nav-icon" fontSize='inherit' />
+                    </ListItemIcon>
+                    <ListItemText className="nav-item" primary="Home" />
             </ListItem>
             <ListItem className="link" button onClick={() => history.push("/search")}>
                 <ListItemIcon>

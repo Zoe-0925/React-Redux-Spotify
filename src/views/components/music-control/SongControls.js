@@ -1,41 +1,64 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from "react-redux"
 import PropTypes from 'prop-types';
-import './SongControls.css';
+import { increaseSongTime } from "../../../core/player/Actions"
+import { getSongPlaying, getSongPaused, getTimeElapsed, getSongs, getTrackNameById, getSongDetails } from "../../../core/Selectors"
+import { play, pause, resume, stop, } from "../../..//core/player/Actions"
 
+export default function SongControls({ hide }) {
+  const [audio, setAudio] = useState()
 
-export default function SongControls(props) {
+  const dispatch = useDispatch()
+
+  const songPlaying = useSelector(getSongPlaying)
+  const songPaused = useSelector(getSongPaused)
+  const timeElapsed = useSelector(getTimeElapsed)
+  const songs = useSelector(getSongs)
+  const songName = useSelector(getTrackNameById)
+  const songDetails = useSelector(getSongDetails)
+
   const [state, setState] = useState({
-    timeElapsed: props.timeElapsed
+    timeElapsed: timeElapsed
   })
 
   useEffect(() => {
     setState({
-      timeElapsed: props.timeElapsed
+      timeElapsed: timeElapsed
     });
-    if (!props.songPlaying) {
+    if (!songPlaying) {
       clearInterval(state.intervalId);
     }
 
-    if (nextProps.songPlaying && nextProps.timeElapsed === 0) {
+    if (songPlaying && timeElapsed === 0) {
       clearInterval(state.intervalId);
       calculateTime();
     }
-    return () => {
-      cleanup
+  }, [songPlaying, timeElapsed])
+
+
+  const audioControl = (song) => {
+    if (audio === undefined) {
+      dispatch(play(song.track))
+      setAudio(new Audio(song.track.preview_url));
+      audio.play();
+    } else {
+      dispatch(stop())
+      audio.pause();
+      dispatch(play(song.track))
+      setAudio(new Audio(song.track.preview_url));
+      audio.play();
     }
-  }, [props.songPlaying, nextProps.timeElapsed])
-
-
+  };
 
   function calculateTime() {
 
     const intervalId = setInterval(() => {
+      if (songPaused) { return }
       if (state.timeElapsed === 30) {
         clearInterval(state.intervalId);
-        props.stopSong();
-      } else if (!props.songPaused) {
-        props.increaseSongTime(state.timeElapsed + 1);
+        dispatch(stop())
       }
+      increaseSongTime(state.timeElapsed + 1);
     }, 1000);
 
     setState({
@@ -44,8 +67,8 @@ export default function SongControls(props) {
   }
 
   const getSongIndex = () => {
-    const { songs, songDetails } = props;
     const currentIndex = songs.map((song, index) => {
+      //TODO check this
       if (song.track === songDetails) {
         return index;
       } else {
@@ -54,30 +77,33 @@ export default function SongControls(props) {
     }).filter(item => {
       return item !== undefined;
     })[0];
-
     return currentIndex;
   }
 
   const nextSong = () => {
-    const { songs, audioControl } = props;
     let currentIndex = getSongIndex();
     currentIndex === songs.length - 1 ? audioControl(songs[0]) : audioControl(songs[currentIndex + 1]);
   }
 
   const prevSong = () => {
-    const { songs, audioControl } = props;
     let currentIndex = getSongIndex();
     currentIndex === 0 ? audioControl(songs[songs.length - 1]) : audioControl(songs[currentIndex - 1]);
   }
 
-  const showPlay = props.songPaused ? 'fa fa-play-circle-o play-btn' : 'fa fa-pause-circle-o pause-btn';
+  const pauseSong = () => {
+    dispatch(pause())
+  }
+
+  const resumeSong = () => {
+    dispatch(resume())
+  }
+
+  const showPlay = songPaused ? 'fa fa-play-circle-o play-btn' : 'fa fa-pause-circle-o pause-btn';
 
   return (
-    <div className='song-player-container'>
-
-      <div className='song-details'>
-        <p className='song-name'>{props.songName}</p>
-        <p className='artist-name'>{props.artistName}</p>
+    <div className={!hide ? 'song-player-container' : 'hide'}>
+      <div className='song-details song-name'>
+        {songName}
       </div>
 
       <div className='song-controls'>
@@ -87,7 +113,7 @@ export default function SongControls(props) {
         </div>
 
         <div className='play-btn'>
-          <i onClick={!props.songPaused ? props.pauseSong : props.resumeSong} className={"fa play-btn" + showPlay} aria-hidden="true" />
+          <i onClick={!songPaused ? pauseSong : resumeSong} className={"fa play-btn" + showPlay} aria-hidden="true" />
         </div>
 
         <div onClick={nextSong} className='next-song'>
@@ -95,13 +121,11 @@ export default function SongControls(props) {
         </div>
 
       </div>
-
       <div className='song-progress-container'>
         <div className='song-progress'>
-          <div style={{ width: state.timeElapsed * 16.5 }} className='song-expired' />
+          <div style={{ width: state.timeElapsed ? state.timeElapsed * 16.5 : 0 }} className='song-expired' />
         </div>
       </div>
-
     </div>
   );
 }
@@ -112,11 +136,10 @@ SongControls.propTypes = {
   songPlaying: PropTypes.bool,
   songPaused: PropTypes.bool,
   songName: PropTypes.string,
-  artistName: PropTypes.string,
-  stopSong: PropTypes.func,
-  resumeSong: PropTypes.func,
+  stop: PropTypes.func,
+  resume: PropTypes.func,
   increaseSongTime: PropTypes.func,
-  pauseSong: PropTypes.func,
+  pause: PropTypes.func,
   songs: PropTypes.array,
   songDetails: PropTypes.object,
   audioControl: PropTypes.func

@@ -32,4 +32,9 @@ export const resume = () => ({
     type: RESUME_SONG
 })
 
-
+export const increaseSongTime = (time) => {
+    return {
+      type: 'INCREASE_SONG_TIME',
+      time
+    };
+  };

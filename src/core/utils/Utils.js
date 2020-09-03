@@ -1,4 +1,3 @@
-import React from 'react';
 import createAlbum from "../album/Album"
 import createArtist from "../artist/Artist"
 import createTrack from "../track/Track"

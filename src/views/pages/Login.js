@@ -11,7 +11,10 @@ export default function Login({ setShow }) {
 
     //Save the access token to the store
     const dispatchSaveToken = useCallback(
-        (accessToken) => dispatchStore(saveAccessToken(accessToken)),
+        accessToken => { 
+            dispatchStore(saveAccessToken(accessToken))
+            setShow(true)
+        },
         [useDispatch()]
     )
 
@@ -19,13 +22,12 @@ export default function Login({ setShow }) {
         //save the token to the redux store
         let newToken = retrieveAccessToken(window.location.href)
         if (newToken !== "" && newToken !== undefined) {
-       
             dispatchSaveToken(newToken)
         }
     }, [window.location.href]);
 
     return (
-        <div class="container">
+        <div className="container">
             <img className="background" src={require("./4.jpg")} alt="background"></img>
             <Button className="Login" href={url}
                 style={{ color: "white", fontSize: "3rem", backgroundColor: "#0a0a0a" }}>
