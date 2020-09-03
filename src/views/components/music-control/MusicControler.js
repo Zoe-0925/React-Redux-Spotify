@@ -40,10 +40,10 @@ export default function MusicControl({hide}) {
                 <p className='artist-name'>{currentTrack !== ("" || undefined) ? currentTrack.get("artists").join(",") : ""}</p>
             </div>
             <div className='song-controls'>
-                <SkipPreviousIcon className='reverse-song' font-size="inherit" onClick={playPreviousTrack} />
+                <SkipPreviousIcon className='reverse-song' fontSize="inherit" onClick={playPreviousTrack} />
                 <ReactAudioPlayer controls={true} src={currentTrack !== ("" || undefined) ? currentTrack.get("url") : ""} 
                 onEnded={playNextTrack}/>
-                  <SkipNextIcon font-size="inherit" className="next-song icon" aria-hidden="true" onClick={playNextTrack} />
+                  <SkipNextIcon fontSize="inherit" className="next-song icon" aria-hidden="true" onClick={playNextTrack} />
             </div>
 
             <div className='song-progress-container'>

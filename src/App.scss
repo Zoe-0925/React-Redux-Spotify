@@ -6,6 +6,7 @@ $greyNav: #090909;
 $greenMain: #1db954;
 $nearlyBlack: #0a0a0a;
 
+
 @font-face {
   font-family: circular-book;
   src: url(./fonts/CircularStd-Book.otf);
@@ -35,6 +36,7 @@ $nearlyBlack: #0a0a0a;
 
 body {
   font-family: circular-book;
+  width: 100%;
 }
 
 .subText {
@@ -43,78 +45,88 @@ body {
 }
 
 .full-screen {
-  z-index: 0;
   width: 100vw;
   height: 100vh;
 }
 
 .App {
   background: grey;
-  width: 100%;
+  width: 100vw;
   height: 100%;
   background: $greyLight;
   display: grid;
-  grid-template-rows: auto 120px;
 
   .upperPart {
-    grid-template-columns: 230px auto;
-    display: flex;
-    text-align: center;
-    width: 100%;
-    overflow: hidden;
+    grid-row-end: 2;
     display: grid;
-    height: 80%;
+    grid-auto-flow: row;
+    text-align: center;
+    width: 100vw;
+    height: 100%;
+    overflow: scroll;
+    background-color: $greyLight;
+
+    .main {
+      margin-left: 230px;
+      padding: 0;
+      margin: 0;
+      width: 100vw;
+      height: 100%;
+      overflow: scroll;
+      position: relative;
+      background-color: $greyLight;
+      color: white;
+
+      h1,
+      h2 {
+        font-size: 1.8rem;
+      }
+    }
+
+    .song-player-container {
+      height: 20%;
+      grid-row-start: 2;
+    }
 
     .SideMenu {
+      z-index: 1;
+      position: fixed;
       color: $greyText;
       text-align: left;
       width: 230px;
       background-color: $nearlyBlack;
-      height: 100%;
+      height: stretch;
+      margin: 0;
 
-      .nav-icon {
-        font-size: 2rem;
-        color: $greyText;
-      }
+      .container {
+        width: 100vmax;
 
-      .nav-divider {
-        font-size: 0.85rem;
-        margin-left: 2rem;
-        margin-top: 2rem;
-        margin-bottom: 1rem;
-      }
-
-      .link {
-        margin-left: 1rem;
-      }
-
-      .link:hover {
-        color: white;
-        opacity: 1;
-      }
-    }
-
-    .main {
-      width: 100%;
-      height: 100%;
-      overflow-y: scroll;
-      position: relative;
-      background-color: $greyLight;
-      .mainContent {
-        color: white;
-
-        .mainInner {
-          padding: 0.5rem 2rem;
+        .nav-icon {
+          font-size: 2rem;
+          color: $greyText;
         }
-        h1,
-        h2 {
-          font-size: 1.8rem;
+
+        .nav-divider {
+          font-size: 0.85rem;
+          margin-left: 2rem;
+          margin-top: 2rem;
+          margin-bottom: 1rem;
+        }
+
+        .link {
+          width: 230px;
+        }
+
+        .link:hover {
+          color: white;
+          opacity: 1;
         }
       }
     }
   }
 
   .musicControls {
+    position: fixed;
     width: 100%;
     background: $greyLighter;
     text-align: center;
@@ -124,7 +136,7 @@ body {
     left: 0;
     bottom: 0;
     color: white;
-    z-index: 2;
+    z-index: 1;
     border-top: 1px solid $greyDark;
 
     .song-controls {
@@ -173,13 +185,12 @@ body {
     );
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), #121212 40%);
     width: 100%;
-    height: 600px;
+    height: 100%;
     overflow: scroll;
   }
   .playlistPageInfo {
     // width: 300px;
     text-align: center;
-    padding: 1.5rem 0;
     .playlistPageImage {
       font-size: 15.625rem;
       width: 15.625rem;
@@ -224,7 +235,6 @@ body {
   }
   .playlistPageContent {
     text-align: left;
-    padding: 1.5rem 2rem;
     color: white;
     width: 100%;
 
@@ -269,11 +279,13 @@ body {
 }
 
 ul.songList {
+  z-index: 1;
+  height: 100vmax;
+  margin-left: 240px;
   padding: 0;
   li {
     list-style-type: none;
     width: 100%;
-    padding: 0.8rem;
     display: flex;
     align-items: center;
     transition: background 0.2s ease-in-out;
@@ -290,6 +302,7 @@ ul.songList {
       }
     }
     .songDetails {
+      z-index: 1;
       h3 {
         margin: 0;
         font-weight: 300;
@@ -355,10 +368,13 @@ ul.songList {
 
 .LibraryPage {
   display: grid;
+  width: 80%;
+  margin-left: 240px;
 
   .head-row {
     display: flex;
     align-items: flex-start;
+    z-index: 1;
   }
 
   .tab {
@@ -386,6 +402,15 @@ ul.songList {
     height: 600px;
     overflow: scroll;
   }
+
+  .list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    grid-gap: 0.5rem;
+    align-items: center;
+    width: 100%;
+    margin-right: 2rem;
+  }
 }
 
 .AlbumPage {
@@ -393,13 +418,22 @@ ul.songList {
 }
 
 .Homepage {
-  display: grid;
+  width: 80%;
 
   .TrackCardList {
+    margin-left: 240px;
     display: grid;
     width: 100%;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
+    margin-right: 1rem;
+
+    .list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      grid-gap: 0.5rem;
+      align-items: center;
+      width: 100%;
+    }
 
     .title {
       align-items: center;
@@ -407,24 +441,20 @@ ul.songList {
       width: 100%;
       cursor: pointer;
       font-size: 1.875rem;
+      margin-top: 2rem;
+      margin-bottom: 0;
     }
   }
 }
 
-.list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  grid-gap: 0.5rem;
-  align-items: center;
-  width: 100%;
-}
-
 .card {
+  z-index: 1;
   background-color: #282828;
   height: 250px;
   max-width: 180px;
   border-radius: 10px;
-  padding:0;
+  padding: 0;
+  margin: 0;
 
   img {
     cursor: pointer;
@@ -537,6 +567,7 @@ ul.songList {
 }
 
 .ArtistTrackCard {
+  z-index: 1;
   height: 240px;
   width: 180px;
   cursor: pointer;
@@ -559,12 +590,22 @@ ul.songList {
 
 .ArtistPage {
   display: grid;
-  width: 100%;
+  width: 80%;
   height: 100%;
+  margin-left: 240px;
 
   h1 {
     color: white;
     text-align: left;
+  }
+
+  .list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    grid-gap: 0.5rem;
+    align-items: center;
+    width: 100%;
+    margin-right: 2rem;
   }
 
   .content {
@@ -591,14 +632,10 @@ ul.songList {
   display: flex;
   align-items: center;
   height: 100%;
-  padding: 0 1rem;
+  padding: 0 0.5rem;
   background-color: grey;
   margin-left: 7%;
   margin-right: 7%;
-}
-
-.main {
-  margin-left: 2%;
 }
 
 .space {
@@ -607,10 +644,6 @@ ul.songList {
 
 .time {
   text-align-last: right;
-}
-
-.MainContainer {
-  width: 100%;
 }
 
 .artist-name:hover,

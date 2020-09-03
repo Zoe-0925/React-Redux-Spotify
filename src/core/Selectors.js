@@ -215,5 +215,11 @@ export const getTracksInAlbum = (id) => createSelector(
     }
 )
 
-
+export const getAlbumsFromStore = createSelector(
+    getAlbums,
+    getCurrentAlbumId,
+    (albums, currentAlbumId) => {
+        return albums.find(item => item.get("albumId") === currentAlbumId)
+    }
+)
 

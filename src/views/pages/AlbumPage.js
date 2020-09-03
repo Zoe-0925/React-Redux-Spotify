@@ -4,18 +4,17 @@ import { v4 as uuidv4 } from 'uuid';
 import { useDispatch, useSelector } from "react-redux"
 import { fetchToggleAlbumSavedLoading } from "../../core/library/Actions"
 import {
-    getAlbums, getCurrentTracks, getCurrentAlbumId, getTrackToToggle
+    getCurrentTracks, getTrackToToggle, getAlbumsFromStore
 } from "../../core/Selectors"
 
-import TracklistItemNew from "../components/track-card/TracklistItem"
+import TracklistItem from "../components/track-card/TracklistItem"
 
 export default function AlbumPage() {
     const [albumSaved, setAlbumSaved] = useState(false)
     const dispatch = useDispatch()
-    const currentAlbumId = useSelector(getCurrentAlbumId)
-    const albumsFromStore = useSelector(getAlbums).find(item => item.get("albumId") === currentAlbumId)
+    const albumsFromStore = useSelector(getAlbumsFromStore)
     const tracks = useSelector(getCurrentTracks)
-    const trackSaved = useSelector(getTrackToToggle) //trackSaved
+    const trackSaved = useSelector(getTrackToToggle) 
 
     const toggleSaveAlbum = useCallback(() => {
         setAlbumSaved(albumSaved => !albumSaved)
@@ -42,7 +41,7 @@ export default function AlbumPage() {
                 albumName={albumsFromStore.get("albumName")} key={uuidv4()} saved={albumSaved}
             />}
             {albumsFromStore && <ul className="songList">
-                {tracks.map(each => <TracklistItemNew saved={trackSaved[tracks.indexOf(each)]}
+                {tracks.map(each => <TracklistItem saved={trackSaved[tracks.indexOf(each)]}
                     index={tracks.indexOf(each)} key={uuidv4()}
                     previous={tracks[tracks.indexOf(each) > 0 ? tracks.indexOf(each) - 1 : 0]}
                     next={tracks[tracks.indexOf(each) + 1 <= tracks.length ? tracks.indexOf(each) + 1 : -1]} current={each}

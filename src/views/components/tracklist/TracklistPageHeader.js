@@ -31,10 +31,10 @@ export default function TracklistPageHeader(props) {
                     </span>
                     <div className="icons">
                         {props.saved &&
-                            <FavoriteIcon className="icon iconsHeart coloredIcon" font-size="inherit" onClick={toggleSave} />}
+                            <FavoriteIcon className="icon iconsHeart coloredIcon" fontSize="inherit" onClick={toggleSave} />}
                         {!props.saved &&
-                            <FavoriteBorderIcon className="icon iconsHeart  coloredIcon" font-size="inherit" onClick={toggleSave} />}
-                        }
+                            <FavoriteBorderIcon className="icon iconsHeart  coloredIcon" fontSize="inherit" onClick={toggleSave} />}
+                        
                         <div className="icon iconsDots"></div>
                     </div>
                 </div>

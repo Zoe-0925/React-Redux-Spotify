@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import SearchBar from "../components/search-bar/SearchBar"
 import AlbumCard from "../components/track-card/AlbumCard"
 import ArtistCard from "../components/track-card/ArtistCard"
-import TracklistItemNew from "../components/track-card/TracklistItem"
+import TracklistItem from "../components/track-card/TracklistItem"
 import { store } from "../../index"
 import { getTrackToToggle } from "../../core/Selectors"
 import { v4 as uuidv4 } from 'uuid';
@@ -48,7 +48,7 @@ export default function Searchpage() {
                     <div className="tracks">
                         <p className="title"> Songs</p>
                         <ul className="songList">
-                            {tracks.map(each => <TracklistItemNew saved={trackSaved[tracks.indexOf(each)]}
+                            {tracks.map(each => <TracklistItem saved={trackSaved[tracks.indexOf(each)]}
                                 index={tracks.indexOf(each)} key={uuidv4()}
                                 previous={tracks[tracks.indexOf(each) > 0 ? tracks.indexOf(each) - 1 : 0]}
                                 next={tracks[tracks.indexOf(each) + 1 <= tracks.length ? tracks.indexOf(each) + 1 : -1]} current={each}

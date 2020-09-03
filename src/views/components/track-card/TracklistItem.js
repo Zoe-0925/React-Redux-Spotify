@@ -82,8 +82,8 @@ export default function TracklistItem(props) {
             </div>
             <div className="songTime">
                 <span>
-                    {!saved && <FavoriteBorderIcon className="icon iconsHeart" font-size="inherit" onClick={toggleSave} />}
-                    {saved && <FavoriteIcon className="icon iconsHeart" font-size="inherit" onClick={toggleSave} />}</span>
+                    {!saved && <FavoriteBorderIcon className="icon iconsHeart" fontSize="inherit" onClick={toggleSave} />}
+                    {saved && <FavoriteIcon className="icon iconsHeart" fontSize="inherit" onClick={toggleSave} />}</span>
                 <span>{props.current.get("duration")}</span>
             </div>
         </li>

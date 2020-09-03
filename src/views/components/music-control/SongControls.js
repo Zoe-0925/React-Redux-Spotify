@@ -101,7 +101,7 @@ export default function SongControls({ hide }) {
   const showPlay = songPaused ? 'fa fa-play-circle-o play-btn' : 'fa fa-pause-circle-o pause-btn';
 
   return (
-    <div className={!hide ? 'song-player-container' : 'hide'}>
+    <div className={!hide ? 'musicControls' : 'hide'}>
       <div className='song-details song-name'>
         {songName}
       </div>

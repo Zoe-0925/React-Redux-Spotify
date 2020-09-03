@@ -7,7 +7,7 @@ export async function fetchRecentPlayed(token) {
     if (token === undefined || token === "") {
         return
     }
-    const url = api_base_url + "me/player/recently-played?type=track&limit=7"
+    const url = api_base_url + "me/player/recently-played?type=track&limit=6"
     var myRequest = createRequest(token, url, "GET")
     const response = await fetch(myRequest)
     const data = await response.json()

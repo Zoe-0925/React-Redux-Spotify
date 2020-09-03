@@ -10,31 +10,33 @@ export default function SideMenu() {
 
     return (
         <div className="SideMenu">
-            <ListItem className="link" button onClick={() => history.push("/Home")}>
+            <div className="container">
+                <ListItem className="link" button onClick={() => history.push("/Home")}>
                     <ListItemIcon>
                         <HomeOutlinedIcon className="nav-icon" fontSize='inherit' />
                     </ListItemIcon>
                     <ListItemText className="nav-item" primary="Home" />
-            </ListItem>
-            <ListItem className="link" button onClick={() => history.push("/search")}>
-                <ListItemIcon>
-                    <SearchOutlinedIcon className="nav-icon" fontSize='inherit' />
-                </ListItemIcon>
-                <ListItemText className="nav-item" primary="Search" />
-            </ListItem>
-            <ListItem className="link" button onClick={() => history.push("/library")}>
-                <ListItemIcon>
-                    <LibraryMusicOutlinedIcon className="nav-icon" fontSize='inherit' />
-                </ListItemIcon>
-                <ListItemText className="nav-item" primary="Your Library" />
-            </ListItem>
-            <p className="nav-divider" >PLAYLISTS</p>
-            <ListItem className="link" button onClick={() => history.push("/create-playlist")}>
-                <ListItemIcon>
-                    <AddBoxIcon className="nav-icon" fontSize='inherit' color='inherit' />
-                </ListItemIcon>
-                <ListItemText className="nav-item" primary="Create Playlist" />
-            </ListItem>
+                </ListItem>
+                <ListItem className="link" button onClick={() => history.push("/search")}>
+                    <ListItemIcon>
+                        <SearchOutlinedIcon className="nav-icon" fontSize='inherit' />
+                    </ListItemIcon>
+                    <ListItemText className="nav-item" primary="Search" />
+                </ListItem>
+                <ListItem className="link" button onClick={() => history.push("/library")}>
+                    <ListItemIcon>
+                        <LibraryMusicOutlinedIcon className="nav-icon" fontSize='inherit' />
+                    </ListItemIcon>
+                    <ListItemText className="nav-item" primary="Your Library" />
+                </ListItem>
+                <p className="nav-divider" >PLAYLISTS</p>
+                <ListItem className="link" button onClick={() => history.push("/create-playlist")}>
+                    <ListItemIcon>
+                        <AddBoxIcon className="nav-icon" fontSize='inherit' color='inherit' />
+                    </ListItemIcon>
+                    <ListItemText className="nav-item" primary="Create Playlist" />
+                </ListItem>
+            </div>
         </div>
     )
 }
