@@ -48,7 +48,6 @@ body {
   height: 100vh;
 }
 
-
 .App {
   background: grey;
   width: 100%;
@@ -62,6 +61,7 @@ body {
     display: flex;
     text-align: center;
     width: 100%;
+    overflow: hidden;
     display: grid;
     height: 80%;
 
@@ -334,6 +334,12 @@ ul.songList {
     height: 638px;
     overflow: scroll;
     width: 100%;
+
+    .songList {
+      height: 250px;
+      overflow: scroll;
+      width: 100%;
+    }
   }
 }
 
@@ -418,23 +424,33 @@ ul.songList {
   height: 250px;
   max-width: 180px;
   border-radius: 10px;
+  padding:0;
 
   img {
     cursor: pointer;
-    margin: 1rem;
+    margin-bottom: 0.5rem;
     width: 10rem;
     height: 10rem;
+    margin-bottom: 0;
+    margin-top: 0.8rem;
   }
 
   .card-title {
+    text-align: left;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 0.5rem;
     font-size: 1.1rem;
-    margin-left: 1.5rem;
     cursor: pointer;
   }
 
   .card-subtitle {
+    align-items: left;
+    align-content: left;
+    text-align: left;
+    margin-top: 0;
     font-size: 0.8rem;
-    margin-left: 1.5rem;
+    margin-left: 0.5rem;
     color: $greyText;
     margin-bottom: 0em;
     cursor: pointer;
@@ -442,14 +458,6 @@ ul.songList {
 
   .artist-card-image {
     border-radius: 50%;
-  }
-
-  .title {
-    font-size: 12px;
-  }
-
-  .description {
-    font-size: 10px;
   }
 
   .cardContent {
@@ -500,11 +508,10 @@ ul.songList {
 }
 
 .container {
-  width:100%;
-  height:100%;
+  width: 100%;
+  height: 100%;
 
-
-  .background{
+  .background {
     width: 100vw;
     height: 100vh;
   }
@@ -532,6 +539,7 @@ ul.songList {
 .ArtistTrackCard {
   height: 240px;
   width: 180px;
+  cursor: pointer;
 
   .ArtistTrackCard-img {
     width: 100%;
@@ -551,6 +559,8 @@ ul.songList {
 
 .ArtistPage {
   display: grid;
+  width: 100%;
+  height: 100%;
 
   h1 {
     color: white;
@@ -617,10 +627,9 @@ ul.songList {
 
 /**Track list item above :**/
 
-.hide{
+.hide {
   display: none;
 }
-
 
 /** SongControl */
 .song-details {
@@ -630,13 +639,13 @@ ul.songList {
 }
 
 .song-details .song-name {
-  font-family: 'Proxima Nova', Georgia, sans-serif;
+  font-family: "Proxima Nova", Georgia, sans-serif;
   color: #fff;
   font-size: 14px;
 }
 
 .song-details .artist-name {
-  font-family: 'Proxima Thin', Georgia, sans-serif;
+  font-family: "Proxima Thin", Georgia, sans-serif;
   color: #aaa;
   font-size: 12px;
 }
@@ -686,7 +695,7 @@ ul.songList {
 .song-progress {
   width: 500px;
   height: 4px;
-  background: rgb(64, 64, 64);;
+  background: rgb(64, 64, 64);
   border-radius: 4px;
 }
 

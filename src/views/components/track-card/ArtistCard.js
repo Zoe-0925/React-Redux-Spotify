@@ -18,14 +18,12 @@ export default function ArtistCard(props) {
 
     return (
         <div className="card" key={uuidv4()} onClick={fetchArtists}>
-            <div className={props.round ? "artist-card-image round" : "artist-card-image"}>
-                <img src={props.imgSrc} alt="track-card" key={uuidv4()}
-                />
+            <div className={props.round ? "artist-card-image round" : ""}>
+                <img src={props.imgSrc} alt="track-card" key={uuidv4()}/>
             </div>
             <div className="cardContent" >
-                <p >{props.title}</p>
-                <span>{props.subtitle}</span>
-
+                <p className="card-title">{props.title}</p>
+                <p className="card-subtitle">{props.subtitle}</p>
             </div>
         </div>
     )

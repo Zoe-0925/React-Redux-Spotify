@@ -2,7 +2,6 @@ import React, { useEffect, useCallback } from 'react';
 import Button from '@material-ui/core/Button';
 import { useDispatch } from 'react-redux'
 import { authorization_base_url, scope, client_id, redirect_url, response_type, } from "../../core/Constants"
-import { retrieveAccessToken } from "../../core/utils/Utils"
 import { saveAccessToken } from "../../core/user/Actions"
 
 export default function Login({ setShow }) {
@@ -11,7 +10,7 @@ export default function Login({ setShow }) {
 
     //Save the access token to the store
     const dispatchSaveToken = useCallback(
-        accessToken => { 
+        accessToken => {
             dispatchStore(saveAccessToken(accessToken))
             setShow(true)
         },
@@ -19,12 +18,20 @@ export default function Login({ setShow }) {
     )
 
     useEffect(() => {
-        //save the token to the redux store
-        let newToken = retrieveAccessToken(window.location.href)
-        if (newToken !== "" && newToken !== undefined) {
-            dispatchSaveToken(newToken)
+        let hashParams = {};
+        let e,
+            r = /([^&;=]+)=?([^&;]*)/g,
+            q = window.location.hash.substring(1);
+        while ((e = r.exec(q))) {
+            hashParams[e[1]] = decodeURIComponent(e[2]);
         }
-    }, [window.location.href]);
+
+        if (!hashParams.access_token) {
+            window.location.href =url;
+        } else {
+            dispatchSaveToken(hashParams.access_token)
+        }
+    }, [window.location.href])
 
     return (
         <div className="container">

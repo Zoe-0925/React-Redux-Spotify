@@ -31,10 +31,10 @@ export default function AlbumCard(props) {
             <img src={props.imgSrc} alt="track-card" key={uuidv4()} onClick={fetchTracks} />
             <div className="cardContent">
                 <p className="card-title" onClick={fetchTracks}>{props.title}</p>
-                <span>
-                    {props.subtitle.map(each =>
-                        <p className="card-subtitle" onClick={handleArtistClick} key={each} id={each}>{each}</p>)}
-                </span>
+                {props.subtitle.map(each => {
+                    return (
+                        <span className="card-subtitle" onClick={handleArtistClick} key={each} id={each}>{each}</span>)
+                })}
             </div>
 
         </div>

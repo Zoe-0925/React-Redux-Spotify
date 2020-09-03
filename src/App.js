@@ -11,27 +11,24 @@ import SongControls from "./views/components/music-control/SongControls"
 import Login from "./views/pages/Login"
 import './App.scss'
 
-import DebugRouter from "./DebugRouter"
-
 const App = () => {
   const [show, setShow] = useState(false)
-
 
   return (
     <div className="App">
       <div className={show ? "upperPart" : "full-screen"}>
         {show && <SideMenu />}
         <div className="main">
-            <Switch>
-              <Route exact path="/" component={() => <Login setShow={setShow} />} />
-              <Route exact path="/Home" component={Homepage} />
-              <Route exact path="/albums" component={AlbumPage} />
-              <Route exact path="/artists" component={ArtistPage} />
-              <Route exact path="/search" component={SearchPage} />
-              <Route exact path="/library" component={LibraryPage} />
-              <Route exact path="/playlists" component={LibraryPage} />
-              <Route exact path="/create-playlist" component={LibraryPage} />
-            </Switch>
+          <Switch>
+            <Route exact path="/" component={() => <Login setShow={setShow} />} />
+            <Route exact path="/Home" component={Homepage} />
+            <Route exact path="/albums" component={AlbumPage} />
+            <Route exact path="/artists" component={ArtistPage} />
+            <Route exact path="/search" component={SearchPage} />
+            <Route exact path="/library" component={LibraryPage} />
+            <Route exact path="/playlists" component={LibraryPage} />
+            <Route exact path="/create-playlist" component={LibraryPage} />
+          </Switch>
         </div>
       </div>
       <SongControls hide={!show} />
