@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 This is a spotify client built with React and Redux Saga.
 
-![alt text](https://github.com/Zoe-0925/IT-for-Social-Goods---Raising-Resilient-Kids/blob/master/public/Demo-1.png)
+![alt text](https://github.com/Zoe-0925/React-Redux-Spotify/blob/master/public/Demo-1.png)
 
 ## Demo: 
 
