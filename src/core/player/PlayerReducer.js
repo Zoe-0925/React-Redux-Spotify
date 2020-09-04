@@ -15,6 +15,7 @@ const PlayerReducer = (state = initialEntity, action) => {
     switch (action.type) {
         case "FETCH_SONGS_SUCCESS":
             newMap.set("songs", action.songs)
+            return newMap
         case PLAY_SONG:
             newMap.set("songPlaying", true)
             newMap.set("songPaused", false)

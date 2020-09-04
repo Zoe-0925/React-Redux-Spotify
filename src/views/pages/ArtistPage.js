@@ -1,13 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import ArtistPageHeader from "../components/artist/ArtistPageHeader"
 import ArtistTrackCard from "../components/track-card/ArtistTrackCard"
 import { useSelector } from "react-redux"
 import {
-    getCurrentArtistsAlbums, getCurrentArtist, getToken, getCurrentArtistSaved,
+    getCurrentArtistsAlbums, getCurrentArtist, getCurrentArtistSaved,
     getRelatedArtists
 } from "../../core/Selectors"
-import history from "../../core/history"
 import { useDispatchArtistPage } from "./CustomHooks"
 
 
