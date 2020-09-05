@@ -38,9 +38,7 @@ const Player = ({hide}) => {
 
     return (
         <div className={!hide ? 'musicControls' : 'hide'}>
-            <div className='song-details song-name'>
-                {songName}
-            </div>
+
             <div className='song-controls'>
                 <div className='play-btn'>
                     <i onClick={toggle} className={"fa play-btn"} aria-hidden="true" />
