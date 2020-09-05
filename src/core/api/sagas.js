@@ -141,11 +141,7 @@ export function* fetchArtistPage() {
     const currentArtistId = yield select(getCurrentArtistId)
     let artistsFromStore = yield select(findArtistById(currentArtistId))
     try {
-        let artistExist = artistsFromStore === undefined ? false : true
-        let relatedArtistsExist = artistsFromStore.get("relatedArtists").length > 0 ? true : false
-        let saveSatusChecked = artistsFromStore.get("saved") !== "" || undefined
-        let albumsExist = artistsFromStore.get("albums").length > 0 ? true : false
-        if (artistExist && !relatedArtistsExist && !saveSatusChecked && !albumsExist) {
+        if (artistsFromStore!==undefined) {
             const [albums, relatedArtists] = yield all([
                 call(fetchArtistsAlbums, token),
                 call(fetchRelatedArtists, token)
@@ -160,7 +156,7 @@ export function* fetchArtistPage() {
                 call(checkArtistSaved, token)
             ])
         }
-        if (!artistExist && !relatedArtistsExist && !saveSatusChecked && !albumsExist) {
+        if (artistsFromStore===undefined) {
             const [artist, albums, relatedArtists] = yield all([
                 call(fetchArtistById, token),
                 call(fetchArtistsAlbums, token),

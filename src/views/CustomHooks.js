@@ -1,16 +1,16 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { useSelector, useDispatch } from "react-redux"
-import { fetchArtistsAlbumsLoading } from "../../core/artist/Actions"
-import { fetchAlbumTracksLoading } from "../../core/track/Actions"
-import history from "../../core/history"
-import { getSavedAlbums, getSavedArtists, getTrackToToggle} from "../../core/Selectors"
-import { loadLibraryPage } from "../../core/library/Actions"
+import { fetchArtistsAlbumsLoading } from "../core/artist/Actions"
+import { fetchAlbumTracksLoading } from "../core/track/Actions"
+import history from "../core/history"
+import { getSavedAlbums, getSavedArtists, getTrackToToggle } from "../core/Selectors"
+import { loadLibraryPage } from "../core/library/Actions"
 
-import { api_base_url } from "../../core/Constants"
-import { createRequest, convertToMin } from "../../core/utils/Utils"
-import { store } from "../../index"
-import createTrack from "../../core/track/Track"
-import createArtist from "../../core/artist/Artist"
+import { api_base_url } from "../core/Constants"
+import { createRequest, convertToMin } from "../core/utils/Utils"
+import { store } from "../index"
+import createTrack from "../core/track/Track"
+import createArtist from "../core/artist/Artist"
 
 
 export default function useLoadTracks(pageNumber) {
@@ -50,23 +50,30 @@ export default function useLoadTracks(pageNumber) {
     return { loading, error, tracks, hasMore }
 }
 
-export const useDispatchArtistPage = () => {
+export const useFetchAlbumPage = () => {
     const dispatch = useDispatch()
 
-    const fetchTracks = useCallback(
-        (e) => dispatch(fetchAlbumTracksLoading(e.target.id)),
+    const fetchTracks = useCallback(id => {
+        dispatch(fetchAlbumTracksLoading(id))
+        history.push("/albums")
+    },
         [dispatch]
     )
 
-    const fetchArtistPage = useCallback(
-        (e) => {
-            dispatch(fetchArtistsAlbumsLoading(e.target.id))
-            history.push("/albums")
-        },
+    return { fetchTracks }
+}
+
+export const useFetchArtistPage = () => {
+    const dispatch = useDispatch()
+
+    const fetchArtistPage = useCallback(id => {
+        dispatch(fetchArtistsAlbumsLoading(id))
+        history.push("/artists")
+    },
         [dispatch],
     )
 
-    return { fetchTracks, fetchArtistPage }
+    return { fetchArtistPage }
 }
 
 export const useDispatchLibraryPage = () => {

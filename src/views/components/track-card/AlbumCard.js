@@ -1,39 +1,29 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { useDispatch } from "react-redux"
-import history from "../../../core/history"
-import { fetchArtistsAlbumsLoading } from "../../../core/artist/Actions"
-import { fetchAlbumTracksLoading } from "../../../core/track/Actions"
+import {useFetchAlbumPage, useFetchArtistPage} from "../../CustomHooks"
 import PropTypes from 'prop-types';
 
+export const useFetchArtist = () => {
+
+}
+
 export default function AlbumCard(props) {
-    const dispatch = useDispatch()
+    const { fetchTracks } = useFetchAlbumPage()
+    const {fetchArtistPage} = useFetchArtistPage()
 
-    const fetchTracks = useCallback(() => {
-        dispatch(fetchAlbumTracksLoading(props.albumId))
-        history.push("/albums")
-    }, [dispatch])
-
-    const handleArtistClick = (e) => {
-        const index = props.subtitle.indexOf(e.target.id)
-        fetchArtists(props.artistIds[index])
-        history.push("/artists/")
+    const handleArtistClick = artistId => {
+        const index = props.subtitle.indexOf(artistId)
+        fetchArtistPage(props.artistIds[index])
     }
-
-    const fetchArtists = useCallback(
-        (id) =>
-            dispatch(fetchArtistsAlbumsLoading(id)
-            ), [dispatch]
-    )
 
     return (
         <div className="card" key={uuidv4()}>
             <img src={props.imgSrc} alt="track-card" key={uuidv4()} onClick={fetchTracks} />
             <div className="cardContent">
-                <p className="card-title" onClick={fetchTracks}>{props.title}</p>
+                <p className="card-title" onClick={() => fetchTracks(props.albumId)}>{props.title}</p>
                 {props.subtitle.map(each => {
                     return (
-                        <span className="card-subtitle" onClick={handleArtistClick} key={uuidv4()} id={each}>{each}</span>)
+                        <span className="card-subtitle" onClick={() => handleArtistClick(each)} key={uuidv4()} id={each}>{each}</span>)
                 })}
             </div>
 

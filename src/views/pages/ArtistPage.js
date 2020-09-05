@@ -7,7 +7,7 @@ import {
     getCurrentArtistsAlbums, getCurrentArtist, getCurrentArtistSaved,
     getRelatedArtists
 } from "../../core/Selectors"
-import { useDispatchArtistPage } from "./CustomHooks"
+import {useFetchAlbumPage, useFetchArtistPage } from "../CustomHooks"
 
 
 export default function ArtistPage() {
@@ -18,17 +18,12 @@ export default function ArtistPage() {
 
     const img = currentArtist !== undefined && currentArtist.get("artistImg") === undefined ? "" : currentArtist.get("artistImg")
 
-    const { fetchTracks, fetchArtistPage } = useDispatchArtistPage()
-
-
+    const { fetchArtistPage } = useFetchArtistPage()
+    const { fetchTracks}= useFetchAlbumPage()
   
-
     if (albums.albums === undefined || albums.singles === undefined || relatedArtists === undefined) {
         return <div className="ArtistPage"></div>
     }
-
-
-
 
 
     return (
@@ -39,14 +34,14 @@ export default function ArtistPage() {
             <h1>Albums</h1>
             <div className="list">
                 {albums.albums.map(each => {
-                    return (<ArtistTrackCard onClick={fetchTracks}  id={each.get("albumId")}
+                    return (<ArtistTrackCard onClick={()=>fetchTracks(each.get("albumId"))}  id={each.get("albumId")}
                         imgSrc={each.get("albumImg")} name={each.get("albumName")} />)
                 })}
             </div>
             <h1>Singles and EPs</h1>
             <div className="list">
                 {albums.singles.map(each => {
-                    return (<ArtistTrackCard onClick={fetchTracks} id={each.get("albumId")}
+                    return (<ArtistTrackCard  onClick={()=>fetchTracks(each.get("albumId"))} id={each.get("albumId")}
                         imgSrc={each.get("albumImg")} name={each.get("albumName")} />)
                 })}
             </div>
@@ -54,7 +49,7 @@ export default function ArtistPage() {
             <div className="list">
                 {relatedArtists.map(each => {
                     return (<ArtistTrackCard id={each.get("artistId")}
-                        round={true} onClick={() => fetchArtistPage}
+                        round={true} onClick={() => fetchArtistPage(each.get("artistId"))}
                         imgSrc={each.get("artistImg")} name={each.get("artistName")} />)
                 })}
             </div>
