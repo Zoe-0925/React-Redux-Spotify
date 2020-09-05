@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { ReactComponent as PlayIcon } from "../../../svgs/play.svg"
+//import { ReactComponent as PlayIcon } from "../../../svgs/play.svg"
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import PropTypes from 'prop-types';
@@ -26,9 +26,6 @@ export default function TracklistPageHeader(props) {
             </div>
             <div className="playlistPageSongs">
                 <div className="playlistButtons">
-                    <span className="playIcon" onClick={props.playAlbum}>
-                        <PlayIcon />
-                    </span>
                     <div className="icons">
                         {props.saved &&
                             <FavoriteIcon className="icon iconsHeart coloredIcon" fontSize="inherit" onClick={toggleSave} />}

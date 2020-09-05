@@ -14,7 +14,7 @@ export const SavedTracks = () => {
         <ul className="songList">
             {tracks !== undefined && tracks.map((each, index) => {
                 if (tracks.length === index + 1) {
-                    return (<TracklistItem saved={trackSaved[tracks.indexOf(each)]}
+                    return (<TracklistItem initialSaved={trackSaved[tracks.indexOf(each)]}
                         index={tracks.indexOf(each)} key={uuidv4()}
                         previous={tracks[tracks.indexOf(each) > 0 ? tracks.indexOf(each) - 1 : 0]}
                         next={tracks[tracks.indexOf(each) + 1 <= tracks.length ? tracks.indexOf(each) + 1 : -1]} current={each}
@@ -22,7 +22,7 @@ export const SavedTracks = () => {
                 }
                 else {
                     return (
-                        <TracklistItem saved={trackSaved[tracks.indexOf(each)]}
+                        <TracklistItem initialSaved={trackSaved[tracks.indexOf(each)]}
                             index={tracks.indexOf(each)} key={uuidv4()}
                             previous={tracks[tracks.indexOf(each) > 0 ? tracks.indexOf(each) - 1 : 0]}
                             next={tracks[tracks.indexOf(each) + 1 <= tracks.length ? tracks.indexOf(each) + 1 : -1]} current={each}

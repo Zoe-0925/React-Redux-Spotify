@@ -8,7 +8,9 @@ let initialEntity = new Map()
 initialEntity.set("songPaused", true)
 initialEntity.set("songPlaying", false)
 initialEntity.set("timeElapsed", 0)
-initialEntity.set("songId", 0)
+initialEntity.set("url", "")
+//"songDetails"
+
 
 const PlayerReducer = (state = initialEntity, action) => {
     let newMap = new Map()
@@ -20,7 +22,7 @@ const PlayerReducer = (state = initialEntity, action) => {
             newMap.set("songPlaying", true)
             newMap.set("songPaused", false)
             newMap.set("songDetails", action.song)
-            newMap.set("songId", action.song.id)
+            newMap.set("url", action.song.url)
             newMap.set("timeElapsed", 0)
             return newMap
         case STOP_SONG:

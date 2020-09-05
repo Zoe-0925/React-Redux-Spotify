@@ -78,53 +78,6 @@ function findItemFromAList(id, list, query) {
     return result
 }
 
-export const formatArtistNameForHeader = (list) => {
-    if (list.length === 3) {
-        return ("With " + list[0] + " ," + list[1] + " and " + list[2])
-    }
-    if (list.length === 2) {
-        return ("With " + list[0] + " and " + list[1])
-    }
-    if (list.length === 1) {
-        return ("With " + list[0])
-    }
-    if (list.length > 3) {
-        return ("With " + list[0] + " ," + list[1] + " ," + list[2] + " and more...")
-    }
-    else {
-        return ""
-    }
-}
-
-export const toUrlString = (txtList) => {
-    let result = ""
-    if (txtList.length > 0) {
-        result = txtList.join("%20")
-    }
-    return result
-}
-
-
-//Take in the url that is returned from Spotify and then get the access token
-export const retrieveAccessToken = url => {
-    let result = ""
-    console.log("url", url)
-    if (url !== undefined || "") {
-        result = url.split("#")
-    }
-    if (result[1] !== undefined) {
-        result = result[1].split("&")
-    }
-    if (result[0] !== undefined) {
-        result = result[0].split("=")
-    }
-    result = result[1]
-    console.log("result", result)
-    return result
-
-}
-
-
 
 export function createArtistFromList(data) {
     let artists = []

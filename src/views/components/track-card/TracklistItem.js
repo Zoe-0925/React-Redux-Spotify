@@ -11,15 +11,50 @@ import PropTypes from 'prop-types';
 import { toggleTrack } from "../../../core/library/Actions"
 import history from "../../../core/history"
 
-export default function TracklistItem(props) {
-    const [saved, setSaved] = useState(props.saved)
+//TODO highly buggy. Check
+export const useSaveTrack = (initialSaved) => {
+    const [saved, setSaved] = useState(initialSaved)
 
-    //TODO 
-    //double click the container => play song
-    //https://medium.com/@anilchaudhary453/double-click-using-react-hooks-4fea2292d3a4
+    const handleToggleTrack = useCallback(
+        (id, index) => dispatch(toggleTrack(id, index)), [dispatch]
+    )
 
+    const toggleSave = () => {
+        setSaved(saved => !saved)  //Update the local state
+        handleToggleTrack()    //Update the global state to sync with the local state
+    }
+
+    return { saved, toggleSave }
+}
+
+export const usePlayTrack = (current) => {
     const [playIcon, setPlayIcon] = useState(true)
 
+    const dispatch = useDispatch()
+
+    const dispatchPlay = useCallback(
+        (current) => dispatch(play(current),
+            [dispatch]
+        ))
+
+    const dispatchPause = useCallback(
+        () => dispatch(pause()), [dispatch]
+    )
+
+    function playTrack(current) {
+        setPlayIcon(false)
+        dispatchPlay(current)
+    }
+
+    function pauseTrack() {
+        setPlayIcon(true)
+        dispatchPause()
+    }
+
+    return { playIcon, playTrack, pauseTrack }
+}
+
+export const useFetchArtistPage = () => {
     const dispatch = useDispatch()
 
     const fetchAlbumsForArtist = useCallback(
@@ -28,7 +63,6 @@ export default function TracklistItem(props) {
         }, [dispatch]
     )
 
-    //TODO debug
     function handleClickArtist(e) {
         const artistId = e.target.id
         if (artistId !== undefined || "") {
@@ -37,54 +71,31 @@ export default function TracklistItem(props) {
         }
     }
 
-    function playTrack() {
-        setPlayIcon(false)
-        //TODO update
-        //to give a list and the current song id
-        dispatchPlay(props.current, props.previous, props.next)
-    }
+    return { handleClickArtist }
+}
 
-    function pauseTrack() {
-        setPlayIcon(true)
-        dispatchPause()
-    }
-
-
-    const dispatchPlay = useCallback(
-        (current, previous, next) => dispatch(play(current, previous, next),
-            [dispatch]
-        ))
-
-    const dispatchPause = useCallback(
-        () => dispatch(pause()), [dispatch]
-    )
-
-    const handleToggleTrack = useCallback(
-        () => dispatch(toggleTrack(props.current.get("id"), props.index)), [dispatch]
-    )
-
-    const toggleSave = () => {
-        setSaved(saved => !saved)
-        handleToggleTrack()
-    }
+export default function TracklistItem({ initialSaved, current, index}) {
+    const { handleClickArtist } = useFetchArtistPage()
+    const { playIcon, playTrack, pauseTrack } = usePlayTrack(current, index)
+    const { saved, toggleSave } = useSaveTrack(initialSaved)
 
     return (
-        <li>
+        <li onClick={playTrack}>
             <div className="songIcon">
                 {!playIcon && <NoteIcon className="noteI" onClick={pauseTrack} />}
                 {playIcon && <PlayIcon className="playI" onClick={playTrack} />}
 
             </div>
             <div className="songDetails">
-                <h3 >{props.current.get("name")}</h3>
-                {props.current.get("artists") !== undefined && props.current.get("artists").map(each => <span className="artist-name" id={each.get("artistId")}
+                <h3 >{current.get("name")}</h3>
+                {current.get("artists") !== undefined && current.get("artists").map(each => <span className="artist-name" id={each.get("artistId")}
                     key={uuidv4()} onClick={handleClickArtist}>{each.get("artistName") + ", "} </span>)}
             </div>
             <div className="songTime">
                 <span>
                     {!saved && <FavoriteBorderIcon className="icon iconsHeart" fontSize="inherit" onClick={toggleSave} />}
                     {saved && <FavoriteIcon className="icon iconsHeart" fontSize="inherit" onClick={toggleSave} />}</span>
-                <span>{props.current.get("duration")}</span>
+                <span>{current.get("duration")}</span>
             </div>
         </li>
 

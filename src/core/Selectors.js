@@ -56,9 +56,8 @@ export const getTrackNameById = id => createSelector(
 
 export const getPlayingTrack = createSelector(
     getPlayerReducer,
-    playerReducer => playerReducer.get("currentTrack")
+    playerReducer => playerReducer.get("url")
 )
-
 
 export const getSongPlaying = createSelector(
     getPlayerReducer,

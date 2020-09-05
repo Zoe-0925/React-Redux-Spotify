@@ -7,7 +7,8 @@ import ArtistPage from "./views/pages/ArtistPage"
 import SideMenu from "./views/components/side-menu/SideMenu"
 import LibraryPage from "./views/pages/LibraryPage"
 import SearchPage from "./views/pages/SearchPage"
-import SongControls from "./views/components/music-control/SongControls"
+import SongControls from "./views/components/music-control/Player"
+//import SongControls from "./views/components/music-control/SongControls"
 import Login from "./views/pages/Login"
 import './App.scss'
 
@@ -31,7 +32,7 @@ const App = () => {
           </Switch>
         </div>
       </div>
-      <SongControls hide={!show} />
+      <Player hide={!show} />
     </div>
   );
 }

@@ -1,18 +1,8 @@
-import {
-    retrieveAccessToken, createRequest,
+import { createRequest,
     convertToMin, findAlbumsById, findArtistsById,
-    retrieveAccessToken
 } from "../Utils"
 const { Map } = require('immutable');
 
-describe('retrieveAccessToken ', () => {
-    it('retrieves the access token from the url correctly', () => {
-        const url = "before#a=token&b"
-        const result = retrieveAccessToken(url)
-        const expectedResult = "token"
-        expect(result).toBe(expectedResult)
-    })
-})
 
 describe('removeDuplicateAlbums ', () => {
     it('return a list after removing duplicate items', () => {

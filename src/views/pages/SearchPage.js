@@ -48,7 +48,7 @@ export default function Searchpage() {
                     <div className="tracks">
                         <p className="title"> Songs</p>
                         <ul className="songList">
-                            {tracks.map(each => <TracklistItem saved={trackSaved[tracks.indexOf(each)]}
+                            {tracks.map(each => <TracklistItem initialSaved={trackSaved[tracks.indexOf(each)]}
                                 index={tracks.indexOf(each)} key={uuidv4()}
                                 previous={tracks[tracks.indexOf(each) > 0 ? tracks.indexOf(each) - 1 : 0]}
                                 next={tracks[tracks.indexOf(each) + 1 <= tracks.length ? tracks.indexOf(each) + 1 : -1]} current={each}
