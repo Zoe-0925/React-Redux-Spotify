@@ -3,8 +3,8 @@
 This is a spotify client built with React and Redux Saga.
 
 ![alt text](https://github.com/Zoe-0925/React-Redux-Spotify/blob/master/public/Demo-1.png)
-
-## Demo: 
+![alt text](https://github.com/Zoe-0925/React-Redux-Spotify/blob/master/public/Demo-2.png)
+![alt text](https://github.com/Zoe-0925/React-Redux-Spotify/blob/master/public/Demo-3.png)
 
 
 ## Tech Stack:  React, Redux Saga, SCSS
