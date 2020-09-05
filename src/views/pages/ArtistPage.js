@@ -7,7 +7,7 @@ import {
     getCurrentArtistsAlbums, getCurrentArtist, getCurrentArtistSaved,
     getRelatedArtists
 } from "../../core/Selectors"
-import {useFetchAlbumPage, useFetchArtistPage } from "../CustomHooks"
+import { useFetchAlbumPage, useFetchArtistPage } from "../CustomHooks"
 
 
 export default function ArtistPage() {
@@ -19,29 +19,32 @@ export default function ArtistPage() {
     const img = currentArtist !== undefined && currentArtist.get("artistImg") === undefined ? "" : currentArtist.get("artistImg")
 
     const { fetchArtistPage } = useFetchArtistPage()
-    const { fetchTracks}= useFetchAlbumPage()
-  
+    const { fetchTracks } = useFetchAlbumPage()
+
     if (albums.albums === undefined || albums.singles === undefined || relatedArtists === undefined) {
         return <div className="ArtistPage"></div>
     }
 
+    const toggleFollow =()=>{
+
+    }
 
     return (
         <div className="ArtistPage">
             {currentArtist !== ("" || undefined) &&
                 <ArtistPageHeader imgSrc={img} artistName={currentArtist.get("artistName")}
-                    key={uuidv4()} saved={saved} />}
+                    toggleFollow={toggleFollow}  key={uuidv4()} saved={saved} />}
             <h1>Albums</h1>
             <div className="list">
                 {albums.albums.map(each => {
-                    return (<ArtistTrackCard onClick={()=>fetchTracks(each.get("albumId"))}  id={each.get("albumId")}
+                    return (<ArtistTrackCard onClick={() => fetchTracks(each.get("albumId"))} id={each.get("albumId")}
                         imgSrc={each.get("albumImg")} name={each.get("albumName")} />)
                 })}
             </div>
             <h1>Singles and EPs</h1>
             <div className="list">
                 {albums.singles.map(each => {
-                    return (<ArtistTrackCard  onClick={()=>fetchTracks(each.get("albumId"))} id={each.get("albumId")}
+                    return (<ArtistTrackCard onClick={() => fetchTracks(each.get("albumId"))} id={each.get("albumId")}
                         imgSrc={each.get("albumImg")} name={each.get("albumName")} />)
                 })}
             </div>
@@ -49,9 +52,12 @@ export default function ArtistPage() {
             <div className="list">
                 {relatedArtists.map(each => {
                     return (<ArtistTrackCard id={each.get("artistId")}
-                        round={true} onClick={() => fetchArtistPage(each.get("artistId"))}
+                        round={true} 
                         imgSrc={each.get("artistImg")} name={each.get("artistName")} />)
                 })}
             </div>
         </div>)
 }
+
+//Disabled: Related artist
+//onClick={() => fetchArtistPage(each.get("artistId"))}

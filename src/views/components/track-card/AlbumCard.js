@@ -18,7 +18,7 @@ export default function AlbumCard(props) {
 
     return (
         <div className="card" key={uuidv4()}>
-            <img src={props.imgSrc} alt="track-card" key={uuidv4()} onClick={fetchTracks} />
+            <img src={props.imgSrc} alt="track-card" key={uuidv4()} onClick={()=>fetchTracks(props.albumId)} />
             <div className="cardContent">
                 <p className="card-title" onClick={() => fetchTracks(props.albumId)}>{props.title}</p>
                 {props.subtitle.map(each => {

@@ -38,7 +38,7 @@ export default function Login({ setShow }) {
             <img className="background" src={require("./4.jpg")} alt="background"></img>
             <Button className="Login" href={url}
                 style={{ color: "white", fontSize: "3rem", backgroundColor: "#0a0a0a" }}>
-                Log in to Spotify</Button>
+                Loading Your Spotify Page</Button>
         </div>
     );
 }

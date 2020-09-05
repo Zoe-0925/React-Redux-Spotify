@@ -10,18 +10,16 @@ export default function TracklistPageHeader(props) {
 
     return (
         <Fragment>
-            <div className="playlistPageInfo">
-                <div className="playlistPageImage">
-                    {props.imgSrc && <img src={props.imgSrc} alt="track-card" key="card-img" />}
-                </div>
+            <div className="playlistPageImage">
+                {props.imgSrc && <img src={props.imgSrc} alt="track-card" key="card-img" />}
+            </div>
 
-                <div className="playlistPageContent">
-                    <p className="smallText uppercase bold">{props.title}</p>
-                    <h1>{props.albumName}</h1>
+            <div className="playlistPageContent">
+                <p className="smallText uppercase bold">{props.title}</p>
+                <h1>{props.albumName}</h1>
 
-                    <div className="playlistPageDesc">
-                        <p className="spotify">{props.artistName}</p>
-                    </div>
+                <div className="playlistPageDesc">
+                    <p className="spotify">{props.artistName}</p>
                 </div>
             </div>
             <div className="playlistPageSongs">
@@ -31,7 +29,7 @@ export default function TracklistPageHeader(props) {
                             <FavoriteIcon className="icon iconsHeart coloredIcon" fontSize="inherit" onClick={toggleSave} />}
                         {!props.saved &&
                             <FavoriteBorderIcon className="icon iconsHeart  coloredIcon" fontSize="inherit" onClick={toggleSave} />}
-                        
+
                         <div className="icon iconsDots"></div>
                     </div>
                 </div>

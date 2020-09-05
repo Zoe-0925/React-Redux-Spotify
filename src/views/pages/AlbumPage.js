@@ -6,7 +6,6 @@ import { fetchToggleAlbumSavedLoading } from "../../core/library/Actions"
 import {
     getCurrentTracks, getTrackToToggle, getAlbumsFromStore
 } from "../../core/Selectors"
-
 import TracklistItem from "../components/track-card/TracklistItem"
 
 export default function AlbumPage() {

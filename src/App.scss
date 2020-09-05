@@ -189,6 +189,7 @@ body {
     overflow: scroll;
   }
   .playlistPageInfo {
+    display:flex;
     // width: 300px;
     text-align: center;
     .playlistPageImage {
@@ -282,13 +283,18 @@ ul.songList {
   z-index: 1;
   height: 100vmax;
   margin-left: 240px;
-  padding: 0;
+  padding: 1rem;
+  text-align: left;
   li {
+    padding: 0.5rem;
     list-style-type: none;
-    width: 100%;
+    width: 95%;
     display: flex;
     align-items: center;
     transition: background 0.2s ease-in-out;
+    .artist-name{
+      font-weight: 300;
+    }
     &:hover {
       background: rgba(255, 255, 255, 0.1);
       .songIcon {
@@ -506,11 +512,24 @@ ul.songList {
 .ArtistPageHeader {
   color: white;
   width: 100%;
+  display:flex;
+  text-align:left;
+
+  .verified{
+    margin-top:3rem;
+    margin-bottom: 1rem;
+  }
+
+  .artist-name{
+    font-size: 5rem;
+    font-weight: 600;
+    margin-top:0;
+  }
 
   .playlistPageImage {
-    font-size: 15.625rem;
-    width: 15.625rem;
-    height: 15.625rem;
+    font-size: 16rem;
+    width: 16rem;
+    height: 16rem;
     object-fit: cover;
     -webkit-box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);
     box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);

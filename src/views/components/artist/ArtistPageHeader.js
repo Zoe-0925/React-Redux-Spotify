@@ -14,12 +14,8 @@ export default function ArtistPageHeader(props) {
                     alt="artist"
                 /> : <AccountBoxIcon className="playlistPageImage" fontSize="inherit"/>}
             <div className="playlistPageContent">
-                <p className="smallText uppercase bold">VERIFIED ARTIST</p>
-                <h1>{props.artistName}</h1>
-                {props.saved &&
-                    <div className="follow-button unfilledIcon" onClick={props.toggleFollow}>Follow</div>}
-                {!props.saved &&
-                    <div className="follow-button coloredIcon" onClick={props.toggleFollow}>UnFollow</div>}
+                <p className="verified smallText uppercase bold">VERIFIED ARTIST</p>
+                <p className="artist-name">{props.artistName}</p>
             </div>
         </div>
     )
@@ -29,3 +25,10 @@ ArtistPageHeader.prototype = {
     imgSrc: PropTypes.string,
     artistName: PropTypes.string,
 }
+
+/**Disabled:
+ *     {props.saved &&
+                    <div className="follow-button unfilledIcon" onClick={props.toggleFollow}>Follow</div>}
+                {!props.saved &&
+                    <div className="follow-button coloredIcon" onClick={props.toggleFollow}>UnFollow</div>}
+ */

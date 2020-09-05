@@ -17,6 +17,7 @@ export default function TrackCardList(props) {
             <div className="list">
                 {display.map(each =>
                     <AlbumCard title={each.get("albumName")} key={uuidv4()}
+                        index={display.indexOf(each)}
                         albumId={each.get("albumId")} artistIds={each.get("artistIds")}
                         subtitle={each.get("artistNames")}
                         imgSrc={each.get("albumImg")} id={uuidv4()} />)}

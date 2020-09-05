@@ -1,17 +1,17 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { useSelector, useDispatch } from "react-redux"
+import history from "../core/history"
 import { fetchArtistsAlbumsLoading } from "../core/artist/Actions"
 import { fetchAlbumTracksLoading } from "../core/track/Actions"
-import history from "../core/history"
+import { toggleTrack } from "../core/library/Actions"
+import { play, pause } from '../core/player/Actions';
 import { getSavedAlbums, getSavedArtists, getTrackToToggle } from "../core/Selectors"
 import { loadLibraryPage } from "../core/library/Actions"
-
 import { api_base_url } from "../core/Constants"
 import { createRequest, convertToMin } from "../core/utils/Utils"
 import { store } from "../index"
 import createTrack from "../core/track/Track"
 import createArtist from "../core/artist/Artist"
-
 
 export default function useLoadTracks(pageNumber) {
     const [loading, setLoading] = useState(true)
@@ -128,3 +128,61 @@ export const useSavedTracks = () => {
 
     return { trackSaved, tracks, lastTrackElementRef }
 }
+
+export const useSaveArtist = ()=>{
+    const dispatch = useDispatch()
+
+    const fetchToggleFollowArtist = useCallback(id => {
+
+    },
+        [dispatch]
+    )
+
+    return { fetchToggleFollowArtist }
+}
+
+//TODO highly buggy. Check
+export const useSaveTrack = (initialSaved) => {
+    const [saved, setSaved] = useState(initialSaved)
+
+    const dispatch = useDispatch()
+
+    const handleToggleTrack = useCallback(
+        (id, index) => dispatch(toggleTrack(id, index)), [dispatch]
+    )
+
+    const toggleSave = () => {
+        setSaved(saved => !saved)  //Update the local state
+        handleToggleTrack()    //Update the global state to sync with the local state
+    }
+
+    return { saved, toggleSave }
+}
+
+export const usePlayTrack = (current) => {
+    const [playIcon, setPlayIcon] = useState(true)
+
+    const dispatch = useDispatch()
+
+    const dispatchPlay = useCallback(
+        (current) => dispatch(play(current),
+            [dispatch]
+        ))
+
+    const dispatchPause = useCallback(
+        () => dispatch(pause()), [dispatch]
+    )
+
+    function playTrack(current) {
+        setPlayIcon(false)
+        dispatchPlay(current)
+    }
+
+    function pauseTrack() {
+        setPlayIcon(true)
+        dispatchPause()
+    }
+
+    return { playIcon, playTrack, pauseTrack }
+}
+
