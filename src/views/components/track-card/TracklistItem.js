@@ -15,6 +15,8 @@ import history from "../../../core/history"
 export const useSaveTrack = (initialSaved) => {
     const [saved, setSaved] = useState(initialSaved)
 
+    const dispatch = useDispatch()
+
     const handleToggleTrack = useCallback(
         (id, index) => dispatch(toggleTrack(id, index)), [dispatch]
     )
@@ -80,7 +82,7 @@ export default function TracklistItem({ initialSaved, current, index}) {
     const { saved, toggleSave } = useSaveTrack(initialSaved)
 
     return (
-        <li onClick={playTrack}>
+        <li>
             <div className="songIcon">
                 {!playIcon && <NoteIcon className="noteI" onClick={pauseTrack} />}
                 {playIcon && <PlayIcon className="playI" onClick={playTrack} />}
