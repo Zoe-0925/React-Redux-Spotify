@@ -12,9 +12,9 @@ export const saveArtists = artists => ({
 })
 
 
-export const fetchArtistsAlbumsLoading = artistId => ({
+export const fetchArtistsAlbumsLoading = id => ({
     type: FETCH_ARTISTS_ALBUMS_LOADING,
-    artistId: artistId
+    artistId:id
 })
 
 export const fetchArtistsAlbumsSuccessful = data => ({

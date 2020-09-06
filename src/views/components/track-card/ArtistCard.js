@@ -5,12 +5,12 @@ import { fetchArtistsAlbumsLoading } from "../../../core/artist/Actions"
 import PropTypes from 'prop-types';
 import history from "../../../core/history"
 
-export default function ArtistCard(props) {
+export default function ArtistCard({artist, round, subtitle}) {
     const dispatch = useDispatch()
 
     const fetchArtists = useCallback(
         () => {
-            dispatch(fetchArtistsAlbumsLoading(props.artistId))
+            dispatch(fetchArtistsAlbumsLoading(artist))
             history.push("/artists")
         },
         [dispatch],
@@ -18,12 +18,12 @@ export default function ArtistCard(props) {
 
     return (
         <div className="card" key={uuidv4()} onClick={fetchArtists}>
-            <div className={props.round ? "artist-card-image round" : ""}>
-                <img src={props.imgSrc} alt="track-card" key={uuidv4()}/>
+            <div className={round ? "artist-card-image round" : ""}>
+                <img src={artistget("artistImg")} alt="track-card" key={uuidv4()}/>
             </div>
             <div className="cardContent" >
-                <p className="card-title">{props.title}</p>
-                <p className="card-subtitle">{props.subtitle}</p>
+                <p className="card-title">{artistget("artistName")}</p>
+                <p className="card-subtitle">{subtitle}</p>
             </div>
         </div>
     )

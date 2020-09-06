@@ -129,7 +129,7 @@ export const useSavedTracks = () => {
     return { trackSaved, tracks, lastTrackElementRef }
 }
 
-export const useSaveArtist = ()=>{
+export const useSaveArtist = () => {
     const dispatch = useDispatch()
 
     const fetchToggleFollowArtist = useCallback(id => {

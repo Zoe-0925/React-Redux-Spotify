@@ -58,8 +58,7 @@ export default function LibraryPage() {
                         artistIds={each.get("artistIds")} albumId={each.get("albumId")} imgSrc={each.get("albumImg")}
                     />)}
                 {view === "artists" && savedArtists !== undefined && savedArtists.length > 0 && savedArtists.map(each =>
-                    <ArtistCard title={each.get("artistName")} round={true}
-                        subtitle="Artist" artistId={each.get("artistId")} imgSrc={each.get("artistImg")} />)}
+                    <ArtistCard artist={each} round={true} subtitle="Artist" />)}
                 {view === "songs" &&
                     <SavedTracks />
                 }

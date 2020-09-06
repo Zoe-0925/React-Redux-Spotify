@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux"
 import SearchBar from "../components/search-bar/SearchBar"
 import AlbumCard from "../components/track-card/AlbumCard"
 import ArtistCard from "../components/track-card/ArtistCard"
 import TracklistItem from "../components/track-card/TracklistItem"
-import { store } from "../../index"
 import { getTrackToToggle } from "../../core/Selectors"
 import { v4 as uuidv4 } from 'uuid';
+import { useFetchArtistPage } from "../CustomHooks"
 
 export default function Searchpage() {
     const [showResults, setShowResults] = useState(false)
@@ -15,15 +16,15 @@ export default function Searchpage() {
     const [playlists, setPlaylists] = useState([])
     const [trackSaved, setTrackSaved] = useState([])
     const [notFound, setNotFound] = useState(false)
-
-    const storeState = store.getState()
+    const tracksToToggle = useSelector(getTrackToToggle)
+    const { fetchArtistPage } = useFetchArtistPage()
 
     useEffect(() => {
-        const tracksToToggle = getTrackToToggle(storeState)
         if (tracksToToggle.length !== 0) {
-            setTrackSaved(getTrackToToggle(storeState))
+            setTrackSaved(tracksToToggle)
         }
-    }, [storeState.TrackReducer])
+    }, [getTrackToToggle])
+
 
 
     function handleResult(data) {
@@ -38,6 +39,8 @@ export default function Searchpage() {
     function displayError(err) {
         console.log(err)
     }
+
+
 
     return (
         <div className="Searchpage">
@@ -58,8 +61,8 @@ export default function Searchpage() {
                 {showResults && <div className="artists" >
                     <p className="title"> Artists</p>
                     <div className="contents">
-                        {artists.map(each => <ArtistCard title={each.get("artistName")} key={uuidv4()}
-                            subtitle="Artist" artistId={each.get("artistId")} imgSrc={each.get("artistImg")} />)}
+                        {artists.map(each => <ArtistCard onClick={() => fetchArtistPage(each.get("artistId"))}
+                            round={false} artist={each} key={uuidv4()} subtitle="Artist" />)}
                     </div>
                 </div>}
                 {showResults && <div className="albums">

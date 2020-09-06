@@ -1,18 +1,16 @@
 import {
     SAVE_ARTISTS, FETCH_ARTISTS_ALBUMS_LOADING,
-    SAVE_RELATED_ARTISTS, UPDATE_CURRENT_ARTIST_SAVED,FETCH_ARTISTS_ALBUMS_SUCCESSFUL 
+    SAVE_RELATED_ARTISTS, UPDATE_CURRENT_ARTIST_SAVED, FETCH_ARTISTS_ALBUMS_SUCCESSFUL
 } from "./Actions"
 
 const initialState = new Map()
 initialState.set("currentArtistId", "")
+initialState.set("currentArtist", {})
 initialState.set("artists", [])
 initialState.set("relatedArtists", [])
 
 const ArtistReducer = (state = initialState, action) => {
     let newState = new Map(state)
-    const artistId = newState.get("currentArtistId")
-
-    let currentArtist
     switch (action.type) {
         case SAVE_ARTISTS:
             const newArtists = action.artists.concat(state.get("artists"))
@@ -20,6 +18,9 @@ const ArtistReducer = (state = initialState, action) => {
             return newState
         case FETCH_ARTISTS_ALBUMS_LOADING:
             newState.set("currentArtistId", action.artistId)
+            const artist = newState.get("artists").find(item => item.get("artistId") === action.artistId)
+            newState.set("currentArtist", artist)
+            console.log("current artist ", newState.get("currentArtist"))
             newState.set("relatedArtists", [])
             return newState
         case FETCH_ARTISTS_ALBUMS_SUCCESSFUL:
@@ -28,14 +29,7 @@ const ArtistReducer = (state = initialState, action) => {
             console.log("artists seem to go wrong", newState.get("artists"))
             const types = newState.get("artists").map(each => typeof each)
             console.log("artist object types", types)
-            try {
-                currentArtist = newState.get("artists").find(item => artistId === item.get("artistId"))
-            }
-            catch (err) {
-                currentArtist = {}
-            }
-            console.log("currentArtist", currentArtist)
-            currentArtist.set("albums", {
+            newState.get("currentArtist").set("albums", {
                 albums: albumIds,
                 singles: singleIds
             })  //Object, not map
@@ -43,14 +37,13 @@ const ArtistReducer = (state = initialState, action) => {
         case SAVE_RELATED_ARTISTS:
             const relatedArtistIds = action.artists.map(each => each.get("artstId"))
             // save the ids of the related artists into the current artist
-            currentArtist = newState.get("artists").find(item => artistId === item.get("artistId"))
-            currentArtist.set("relatedArtists", relatedArtistIds)
-            console.log("currentArtist", currentArtist)
+            newState.get("currentArtist").set("relatedArtists", relatedArtistIds)
+            const mergedArtists = newState.get("artists").concat(action.artists)
+            newState.set("artists", mergedArtists)
             newState.set("relatedArtists", action.artists)
             return newState
         case UPDATE_CURRENT_ARTIST_SAVED:
-            currentArtist = newState.get("artists").find(item => artistId === item.get("artistId"))
-            currentArtist.set("saved", action.data[0])
+            newState.get("currentArtist").set("saved", action.data[0])
             return newState
         default:
             return state;

@@ -25,7 +25,7 @@ export default function ArtistPage() {
         return <div className="ArtistPage"></div>
     }
 
-    const toggleFollow =()=>{
+    const toggleFollow = () => {
 
     }
 
@@ -33,26 +33,28 @@ export default function ArtistPage() {
         <div className="ArtistPage">
             {currentArtist !== ("" || undefined) &&
                 <ArtistPageHeader imgSrc={img} artistName={currentArtist.get("artistName")}
-                    toggleFollow={toggleFollow}  key={uuidv4()} saved={saved} />}
+                    toggleFollow={toggleFollow} key={uuidv4()} saved={saved} />}
             <h1>Albums</h1>
             <div className="list">
                 {albums.albums.map(each => {
-                    return (<ArtistTrackCard onClick={() => fetchTracks(each.get("albumId"))} id={each.get("albumId")}
+                    return (<ArtistTrackCard key={uuidv4()}
+                        onClick={() => fetchTracks(each.get("albumId"))} id={each.get("albumId")}
                         imgSrc={each.get("albumImg")} name={each.get("albumName")} />)
                 })}
             </div>
             <h1>Singles and EPs</h1>
             <div className="list">
                 {albums.singles.map(each => {
-                    return (<ArtistTrackCard onClick={() => fetchTracks(each.get("albumId"))} id={each.get("albumId")}
+                    return (<ArtistTrackCard key={uuidv4()}
+                        onClick={() => fetchTracks(each.get("albumId"))} id={each.get("albumId")}
                         imgSrc={each.get("albumImg")} name={each.get("albumName")} />)
                 })}
             </div>
             <h1>Related Artists</h1>
             <div className="list">
                 {relatedArtists.map(each => {
-                    return (<ArtistTrackCard id={each.get("artistId")}
-                        round={true} onClick={()=>fetchArtistPage(each.get("artistId"))}
+                    return (<ArtistTrackCard id={each.get("artistId")} key={uuidv4()}
+                        round={true} onClick={() => fetchArtistPage(each.get("artistId"))}
                         imgSrc={each.get("artistImg")} name={each.get("artistName")} />)
                 })}
             </div>

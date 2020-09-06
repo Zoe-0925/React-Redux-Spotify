@@ -149,9 +149,12 @@ export const getArtists = createSelector(
 )
 
 export const getCurrentArtist = createSelector(
-    getArtists,
-    getCurrentArtistId,
-    (artists, id) => artists.find(item => item.get("artistId") === id)
+    getArtistReducer,
+    reducer => 
+    {console.log("current artistId", reducer.get("currentArtistId"))
+    console.log("current artist", reducer.get("currentArtist"))
+    
+     return   reducer.get("currentArtist")}
 )
 
 export const getArtistSaved = createSelector(

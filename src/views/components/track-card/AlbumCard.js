@@ -1,6 +1,6 @@
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import {useFetchAlbumPage, useFetchArtistPage} from "../../CustomHooks"
+import { useFetchAlbumPage, useFetchArtistPage } from "../../CustomHooks"
 import PropTypes from 'prop-types';
 
 export const useFetchArtist = () => {
@@ -9,16 +9,17 @@ export const useFetchArtist = () => {
 
 export default function AlbumCard(props) {
     const { fetchTracks } = useFetchAlbumPage()
-    const {fetchArtistPage} = useFetchArtistPage()
+    const { fetchArtistPage } = useFetchArtistPage()
 
-    const handleArtistClick = artistId => {
-        const index = props.subtitle.indexOf(artistId)
+    const handleArtistClick = artistName => {
+        const index = props.subtitle.indexOf(artistName)
+
         fetchArtistPage(props.artistIds[index])
     }
 
     return (
         <div className="card" key={uuidv4()}>
-            <img src={props.imgSrc} alt="track-card" key={uuidv4()} onClick={()=>fetchTracks(props.albumId)} />
+            <img src={props.imgSrc} alt="track-card" key={uuidv4()} onClick={() => fetchTracks(props.albumId)} />
             <div className="cardContent">
                 <p className="card-title" onClick={() => fetchTracks(props.albumId)}>{props.title}</p>
                 {props.subtitle.map(each => {
