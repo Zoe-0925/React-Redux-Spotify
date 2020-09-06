@@ -52,7 +52,7 @@ export default function ArtistPage() {
             <div className="list">
                 {relatedArtists.map(each => {
                     return (<ArtistTrackCard id={each.get("artistId")}
-                        round={true} 
+                        round={true} onClick={()=>fetchArtistPage(each.get("artistId"))}
                         imgSrc={each.get("artistImg")} name={each.get("artistName")} />)
                 })}
             </div>

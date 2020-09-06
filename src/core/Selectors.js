@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect'
-import { RECENTLY_PLAYED, USERS_TOP_TRACKS, SAVED_ALBUMS, SAVED_ARTISTS } from "./Constants"
+import { RECENTLY_PLAYED, USERS_TOP_TRACKS,  SAVED_ARTISTS } from "./Constants"
 
 export const getPlayerReducer = (state) => {
     return state.PlayerReducer

@@ -34,7 +34,6 @@ export default function AlbumCard(props) {
 AlbumCard.prototype = {
     subtitle: PropTypes.array,
     albumId: PropTypes.string,
-    subtitle: PropTypes.array,
     title: PropTypes.string,
     imgSrc: PropTypes.string,
     artistIds: PropTypes.array,

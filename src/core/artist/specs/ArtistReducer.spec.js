@@ -1,6 +1,6 @@
 import {
-    SAVE_ARTISTS, FETCH_ARTISTS_ALBUMS_LOADING, SAVE_ARTIST_IMG,
-    SAVE_RELATED_ARTISTS, UPDATE_CURRENT_ARTIST_SAVED
+    SAVE_ARTISTS, FETCH_ARTISTS_ALBUMS_LOADING, SAVE_RELATED_ARTISTS, UPDATE_CURRENT_ARTIST_SAVED,
+    FETCH_ARTISTS_ALBUMS_SUCCESSFUL
 } from "../Actions"
 
 const { Map } = require('immutable');
@@ -11,6 +11,7 @@ describe('ArtistReducer', () => {
     let initialState
     let tracks
     let saved
+    let albumData ={albums:""}
 
     beforeEach(() => {
         data = ["artist1", "artist2"]
@@ -79,5 +80,17 @@ describe('ArtistReducer', () => {
         });
     });
 
+    describe('FETCH_ARTISTS_ALBUMS_SUCCESSFUL', () => {
+        it('should return initial state', () => {
+            let artists = ArtistReducer(saved, {
+                type: FETCH_ARTISTS_ALBUMS_SUCCESSFUL,
+               data:
+            })
+            expect(artists.get("currentArtistSaved")).toBe(false)
+        });
+    });
+
+
+    
 
 })

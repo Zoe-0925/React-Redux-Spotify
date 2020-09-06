@@ -142,6 +142,7 @@ export function* fetchArtistPage() {
     let artistsFromStore = yield select(findArtistById(currentArtistId))
     try {
         if (artistsFromStore!==undefined) {
+            console.log("artistsFromStore",artistsFromStore)
             const [albums, relatedArtists] = yield all([
                 call(fetchArtistsAlbums, token),
                 call(fetchRelatedArtists, token)

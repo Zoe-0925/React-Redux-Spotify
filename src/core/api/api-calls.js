@@ -100,10 +100,6 @@ export async function fetchSavedAlbums(token) {
     const response = await fetch(myRequest)
     const data = await response.json()
     return data.items;
-    //  createSavedAlbums
-    // store.dispatch(saveAlbums(albums))
-    // store.dispatch(saveToSavedAlbums(albums))
-    // store.dispatch(saveArtists(artists))
 }
 
 export async function fetchRelatedArtists(token) {
