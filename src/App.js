@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { hot } from 'react-hot-loader/root'
 import { Route, Switch, } from 'react-router-dom';
-import Homepage from "./views/pages/HomePage"
-import AlbumPage from "./views/pages/AlbumPage"
-import ArtistPage from "./views/pages/ArtistPage"
-import SideMenu from "./views/components/side-menu/SideMenu"
-import LibraryPage from "./views/pages/LibraryPage"
-import SearchPage from "./views/pages/SearchPage"
-import Player from "./views/components/music-control/Player"
+import Homepage from "./Pages/HomePage"
+import AlbumPage from "./Pages/AlbumPage"
+import ArtistPage from "./Pages/ArtistPage"
+import SideMenu from "./Components/SideMenu/SideMenu"
+import LibraryPage from "./Pages/LibraryPage"
+import SearchPage from "./Pages/SearchPage"
+import Player from "./Components/MusicControl/Player"
 //import SongControls from "./views/components/music-control/SongControls"
-import Login from "./views/pages/Login"
+import Login from "./Pages/LoginPage"
 import './App.scss'
 
 const App = () => {

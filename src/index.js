@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import { Router } from 'react-router-dom';
-import RootReducer from "./core/RootReducer"
-import RootSaga from "./core/RootSaga"
+import RootReducer from "./Reducers"
+import RootSaga from "./Sagas/RootSaga"
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import { logger } from 'redux-logger'
 import createSagaMiddleware from 'redux-saga';
-import history from "./core/history"
+import history from "./Components/history"
 
 const sagaMiddleware = createSagaMiddleware();
 
