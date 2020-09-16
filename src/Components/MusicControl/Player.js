@@ -9,6 +9,11 @@ export const useAudio = () => {
     const [audio] = useState(new Audio(url));
     const playing = useSelector(getSongPlaying)
 
+    const pause = ()=>{}
+    const resume = ()=>{}
+    const stop = ()=>{}
+    
+
     const toggle = useCallback(
         () => {
             if (playing) { dispatch(pause()) }
@@ -24,9 +29,9 @@ export const useAudio = () => {
     );
 
     useEffect(() => {
-        audio.addEventListener('ended', () => dispatch(stop()));
+        audio.addEventListener('ended', () => dispatch(stop));
         return () => {
-            audio.removeEventListener('ended', () => dispatch(stop()));
+            audio.removeEventListener('ended', () => dispatch(stop));
         };
     }, []);
 
