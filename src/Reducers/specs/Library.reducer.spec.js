@@ -1,12 +1,12 @@
 import {
     SAVED_ALBUMS, SAVED_ARTISTS, SAVED_PLAYLISTS, SAVED_TRACKS, NEXT_TRACKS,
     RECENTLY_PLAYED, USERS_TOP_TRACKS,
-} from "../Components/Constants"
+} from "../../Components/Constants"
 import {
     LOAD_LIBRARY_PAGE, SAVE_TO_SAVED_ALBUMS, SAVE_TO_SAVED_ARTISTS, SAVE_TO_SAVED_TRACKS,
     LOAD_NEXT_TRACKS, TOGGLE_TRACK, TOGGLE_ARTIST, TOGGLE_ALBUM, TOGGLE_PLAYLIST, RECENTLY_PLAYED,
     USERS_TOP_TRACKS
-} from "../Actions"
+} from "../../Actions"
 
 describe('LibraryReducer', () => {
     let data

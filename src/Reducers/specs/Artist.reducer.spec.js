@@ -2,6 +2,7 @@ import {
     SAVE_ARTISTS, FETCH_ARTISTS_ALBUMS_LOADING, SAVE_RELATED_ARTISTS, UPDATE_CURRENT_ARTIST_SAVED,
     FETCH_ARTISTS_ALBUMS_SUCCESSFUL
 } from "../../Actions/ArtistActions"
+import ArtistReducer from "../Artist.reducer"
 
 const { Map } = require('immutable');
 

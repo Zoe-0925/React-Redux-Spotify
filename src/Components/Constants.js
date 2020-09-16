@@ -6,7 +6,7 @@ export const client_secret = "80852af252fe42fd9089bbbea4b13c2c"
 
 export const response_type = "token"
 
-export const redirect_url = "http://localhost:3000"
+export const redirect_url = process.env.NODE_ENV === "development" ?"http://localhost:3000":"https://spotify-react-redux-saga.netlify.app"
 
 export const scope = ["playlist-read-private", "user-top-read", "user-follow-read", "playlist-read-collaborative",
     "playlist-read-private", "playlist-modify-public", "playlist-modify-private",
