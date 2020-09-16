@@ -18,9 +18,7 @@ export function createRequest(token, url, method) {
         mode: 'cors',
         cache: 'default'
     };
-    var myRequest = new Request(url, myInit);
-
-    return myRequest
+    return new Request(url, myInit)
 }
 
 export function convertToMin(duration_ms) {
@@ -34,44 +32,25 @@ export function convertToMin(duration_ms) {
 }
 
 export const findAlbumsById = (albums, albumId) => {
-    const result = albums.find(item => item.get("albumId") === albumId)
-    return result
+    return albums.find(item => item.get("albumId") === albumId)
 }
 
-
 export const findArtistsById = (artists, artistId) => {
-    const result = artists.find(item => item.get("artistId") === artistId)
-    return result
+    return artists.find(item => item.get("artistId") === artistId)
 }
 
 export function removeDuplicates(list) {
-    let result = []
-    let trimmedIdList = Array.from(new Set(list.map(each => each.get("artistId"))))
-    result = trimmedIdList.map(each => {
-        let midResult = findItemFromAList(each, list, "artistId")
-        return midResult
-    })
-    return result
+    return Array.from(new Set(list.map(each => each.get("artistId"))))
+        .map(each => list.find(item => each === item.get("artistId")))
 }
-
 
 export function removeDuplicateAlbums(list) {
-    let result = []
-    let trimmedIdList = Array.from(new Set(list.map(each => each.get("albumId"))))
-    let midResult = trimmedIdList.map(each => {
-        return findItemFromAList(each, list, "albumId")
-    })
-    let trimmedNameList = Array.from(new Set(midResult.map(each => each.get("albumName"))))
-    result = trimmedNameList.map(each => {
-        return findItemFromAList(each, list, "albumName")
-    })
+    const midResult = Array.from(new Set(list.map(each => each.get("albumId"))))
+        .map(each => list.find(item => each === item.get("albumId")))
+    const result = Array.from(new Set(midResult.map(each => each.get("albumName"))))
+        .map(each => list.find(item => each === item.get("albumName")))
     return result
 }
-
-function findItemFromAList(id, list, query) {
-    return list.filter(each => id === each.get(query))
-}
-
 
 export function createArtistFromList(data) {
     if (data === undefined) { return [] }
@@ -103,10 +82,9 @@ export function createTracksForAlbum(list) {
 
 export function createAlbumFromData(data) {
     const albumImg = data.images[1] ? data.images[1].url : data.images[0] ? data.images[0].url : ""
-    let anAlbum = createAlbum(data.id, data.name, albumImg, data.album_type,
+    return createAlbum(data.id, data.name, albumImg, data.album_type,
         data.artists.map(eachArtist => eachArtist.id),
         data.artists.map(eachArtist => eachArtist.name))
-    return anAlbum
 }
 
 export function createAlbumsForAnArtist(list) {
@@ -133,11 +111,10 @@ export function createAlbumsForAnArtist(list) {
             }
         }
     })
-    const result = {
+    return {
         albums: albums,
         singles: singles
     }
-    return result
 }
 
 export function createSavedAlbums(list) {

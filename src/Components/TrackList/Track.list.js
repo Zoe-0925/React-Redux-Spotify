@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from "react-redux"
 import { findAlbumList } from "../../Reducers/Selectors"
-import AlbumCard from "../TrackCard/AlbumCard"
+import AlbumCard from "../TrackCard/Album.card"
 import { v4 as uuidv4 } from 'uuid';
 import PropTypes from 'prop-types';
 

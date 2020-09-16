@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { ListItem, ListItemText } from '@material-ui/core';
 import { v4 as uuidv4 } from 'uuid';
-import AlbumCard from "../Components/TrackCard/AlbumCard"
-import ArtistCard from "../Components/TrackCard/ArtistCard"
-import TracklistItem from "../Components/TrackCard/TracklistItem"
+import AlbumCard from "../Components/TrackCard/Album.card"
+import ArtistCard from "../Components/TrackCard/Artist.card"
+import TracklistItem from "../Components/TrackList/Track.item"
 import { useDispatchLibraryPage, useSavedTracks } from "../Components/CustomHooks"
 
 //TODO bug

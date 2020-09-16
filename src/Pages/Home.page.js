@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux"
-import TrackCardList from "../Components/TrackList/TrackCardList"
+import TrackCardList from "../Components/TrackList/Track.list"
 import { RECENTLY_PLAYED, USERS_TOP_TRACKS, } from "../Components/Constants"
 import { getRecentlyPlayed, getUserTopTracks } from "../Reducers/Selectors"
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector } from "react-redux"
 import { v4 as uuidv4 } from 'uuid';
-import ArtistPageHeader from "../Components/Artist/ArtistPageHeader"
-import ArtistTrackCard from "../Components/TrackCard/ArtistTrackCard"
+import ArtistPageHeader from "../Components/Artist/Artist.pageheader"
+import ArtistTrackCard from "../Components/TrackCard/ArtistTrack.card"
 import {
     getCurrentArtistsAlbums, getCurrentArtist, getCurrentArtistSaved,
     getRelatedArtists

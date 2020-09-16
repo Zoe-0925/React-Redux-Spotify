@@ -1,12 +1,12 @@
 import React, { useState, useCallback } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import TracklistPageHeader from '../Components/TrackList/TracklistPageHeader'
+import TracklistPageHeader from '../Components/TrackList/Track.pageheader'
 import { useDispatch, useSelector } from "react-redux"
 import { fetchToggleAlbumSavedLoading } from "../Actions/LibraryActions"
 import {
     getCurrentTracks, getTrackToToggle, getAlbumsFromStore
 } from "../Reducers/Selectors"
-import TracklistItem from "../Components/TrackCard/TracklistItem"
+import TracklistItem from "../Components/TrackList/Track.item"
 
 export default function AlbumPage() {
     const [albumSaved, setAlbumSaved] = useState(false)

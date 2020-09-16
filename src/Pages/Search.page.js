@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import { useSelector } from "react-redux"
 import SearchBar from "../Components/SearchBar/SearchBar"
-import AlbumCard from "../Components/TrackCard/AlbumCard"
-import ArtistCard from "../Components/TrackCard/ArtistCard"
-import TracklistItem from "../Components/TrackCard/TracklistItem"
+import AlbumCard from "../Components/TrackCard/Album.card"
+import ArtistCard from "../Components/TrackCard/Artist.card"
+import TracklistItem from "../Components/TrackList/Track.item"
 import { getTrackToToggle } from "../Reducers/Selectors"
 import { useFetchArtistPage } from "../Components/CustomHooks"
 

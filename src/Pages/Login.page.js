@@ -14,7 +14,7 @@ export default function Login({ setShow }) {
             dispatchStore(saveAccessToken(accessToken))
             setShow(true)
         },
-        [useDispatch()]
+        [dispatchStore]
     )
 
     useEffect(() => {
