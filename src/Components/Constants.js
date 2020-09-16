@@ -22,7 +22,6 @@ export const FOR_FANS_OF_FIRST = "For Fans Of first"
 export const FOR_FANS_OF_SECOND = "For Fans Of second"
 export const FOR_FANS_OF = "For Fans Of "
 export const FANS_ALSO_LIKE = "Fans also like"
-
 export const SAVED_ALBUMS = "Albums"
 export const SAVED_ARTISTS = "Artists"
 export const SAVED_PLAYLISTS = "Playlists"

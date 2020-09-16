@@ -1,9 +1,9 @@
 import { call, take, all, select, takeLatest, fork, put } from 'redux-saga/effects';
 import {
     fetchArtistById, fetchArtistsAlbums, fetchAlbumById, fetchSavedAlbums, fetchSavedArtists,
-    fetchSavedTracks,
+    //fetchSavedTracks,fetchArtistsTopTracks,
     fetchRelatedArtists, fetchRecentPlayed, fetchUsersTopTracks, fetchUsersTopTwoArtists,
-    fetchTracksForAlbum, fetchArtistsTopTracks, checkFollowAlbum, checkFollowTracks, checkFollowArtist
+    fetchTracksForAlbum, checkFollowAlbum, checkFollowTracks, checkFollowArtist
 } from "../Components/Api/ApiCalls"
 
 import { SAVE_ACCESS_TOKEN } from "../Actions/UserActions"
@@ -12,7 +12,7 @@ import {
 } from "../Actions/TrackActions"
 import { saveAlbums } from "../Actions/AlbumActions"
 import {
-    LOAD_LIBRARY_PAGE, toggleAlbum, toggleTrack, toggleArtist,
+    LOAD_LIBRARY_PAGE, toggleAlbum, toggleTrack, //toggleArtist,
     saveToSavedAlbums, saveToSavedArtists, saveToRecentlyPlay, saveToUserTopTracks
 } from "../Actions/LibraryActions"
 import {
@@ -27,7 +27,7 @@ import {
 import history from "../Components/history"
 import {
     createArtistFromList, createTracksForAlbum,
-    createAlbumFromData, createAlbumsForAnArtist, createSavedAlbums, createRecentPlayed, createTopTracksForArtist,
+    createAlbumFromData, createAlbumsForAnArtist, createSavedAlbums, createRecentPlayed, //createTopTracksForArtist,
     createUsersTopTracks, createTop2Artists
 } from "../Components/Utils/Utils"
 

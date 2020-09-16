@@ -40,7 +40,6 @@ export default function TracklistPageHeader(props) {
 
 TracklistPageHeader.prototype = {
     saveToLikes: PropTypes.func,
-    playAlbum: PropTypes.func,
     artistName: PropTypes.string,
     albumName: PropTypes.string,
     imgSr: PropTypes.string,

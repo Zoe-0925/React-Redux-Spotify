@@ -69,51 +69,36 @@ export function removeDuplicateAlbums(list) {
 }
 
 function findItemFromAList(id, list, query) {
-    let result
-    list.map(each => {
-        if (id === each.get(query)) {
-            result = each
-        }
-    })
-    return result
+    return list.filter(each => id === each.get(query))
 }
 
 
 export function createArtistFromList(data) {
-    let artists = []
     if (data === undefined) { return [] }
-    console.log("list in util", data)
     if (data.length > 0) {
-        data.map(each => {
+        return data.map(each => {
             let url = each.images.length === 0 ? "" : each.images[0].url
-            artists.push(createArtist(each.id, each.name, url))
+            return createArtist(each.id, each.name, url)
         })
     }
-    return artists
 }
 
-
-
 export function createTracksFromList(list) {
-    let tracks = []
     if (list.length === 0 || list === undefined) { return [] }
-    list.map(
-        each => {
-            let artists = each.track.artists.map(eachArtist => createArtist(eachArtist.id, eachArtist.name, ""))
-            tracks.push(createTrack(each.track.id, each.track.name, convertToMin(each.track.duration_ms), each.track.preview_url, artists))
-        })
-    return tracks
+    return list.map(each => {
+        let artists = each.track.artists.map(eachArtist => createArtist(eachArtist.id, eachArtist.name, ""))
+        return createTrack(each.track.id, each.track.name, convertToMin(each.track.duration_ms), each.track.preview_url, artists)
+    })
 }
 
 export function createTracksForAlbum(list) {
-    const tracks = list.map(each => {
+    return list.map(each => {
         let artists = []
         each.artists.map(eachArtist => artists.push(
             createArtist(eachArtist.id, eachArtist.name, "")
         ))
         return createTrack(each.id, each.name, convertToMin(each.duration_ms), each.preview_url, artists)
     })
-    return tracks
 }
 
 export function createAlbumFromData(data) {

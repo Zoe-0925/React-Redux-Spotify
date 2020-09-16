@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import { Router } from 'react-router-dom';
 import RootReducer from "./Reducers"
-import RootSaga from "./Sagas/RootSaga"
+import RootSaga from "./Sagas/Root.saga"
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import { logger } from 'redux-logger'

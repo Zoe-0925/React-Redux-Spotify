@@ -5,7 +5,7 @@ import { fetchArtistsAlbumsLoading } from "../../Actions/ArtistActions"
 import PropTypes from 'prop-types';
 import history from "../history"
 
-export default function ArtistCard({artist, round, subtitle}) {
+export default function ArtistCard({ artist, round, subtitle }) {
     const dispatch = useDispatch()
 
     const fetchArtists = useCallback(
@@ -13,13 +13,13 @@ export default function ArtistCard({artist, round, subtitle}) {
             dispatch(fetchArtistsAlbumsLoading(artist))
             history.push("/artists")
         },
-        [dispatch],
+        [dispatch, artist],
     )
 
     return (
         <div className="card" key={uuidv4()} onClick={fetchArtists}>
             <div className={round ? "artist-card-image round" : ""}>
-                <img src={artist.get("artistImg")} alt="TrackCard" key={uuidv4()}/>
+                <img src={artist.get("artistImg")} alt="TrackCard" key={uuidv4()} />
             </div>
             <div className="cardContent" >
                 <p className="card-title">{artist.get("artistName")}</p>

@@ -8,7 +8,7 @@ import { useDispatchLibraryPage, useSavedTracks } from "../Components/CustomHook
 
 //TODO bug
 export const SavedTracks = () => {
-    const { trackSaved, tracks, lastTrackElementRef } = useSavedTracks
+    const { trackSaved, tracks } = useSavedTracks
 
     return (
         <ul className="songList">

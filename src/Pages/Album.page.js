@@ -20,23 +20,10 @@ export default function AlbumPage() {
         dispatch(fetchToggleAlbumSavedLoading())
     }, [dispatch])
 
-    function playTrack(trackId) {
-        //play the whole album
-    }
-
-    function pauseTrack(trackId) {
-        //Pause the play of the album
-    }
-
-    function playAlbum() {
-        //update the currentPlayingTracks and also set the current track index to 0
-
-    }
-
     return (
         <div className="mainInner">
             {albumsFromStore && <TracklistPageHeader title={albumsFromStore.get("albumType") ? albumsFromStore.get("albumType") : "ALBUM"} imgSrc={albumsFromStore.get("albumImg")}
-                artistName={albumsFromStore.get("artistName")} playAlbum={playAlbum} toggleSave={toggleSaveAlbum}
+                artistName={albumsFromStore.get("artistName")} toggleSave={toggleSaveAlbum}
                 albumName={albumsFromStore.get("albumName")} key={uuidv4()} saved={albumSaved}
             />}
             {albumsFromStore && <ul className="songList">

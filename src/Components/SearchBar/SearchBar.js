@@ -14,8 +14,7 @@ export default function SearchBar(props) {
         let newQuery = encodeURI(e.target.value)
         setQuery(encodeURI(e.target.value))
         const data = await fetchSearchResults(token, newQuery)
-        if(data!== undefined && data.tracks!== undefined && data.artists!== undefined
-            && data.playlists!== undefined && data.albums!== undefined){
+        if(data && data.tracks && data.artists && data.playlists && data.albums){
             let artists = createArtistFromList(data.artists.items)
             let tracks = createTracksForAlbum(data.tracks.items)
             let albums = data.albums.items.map(each => createAlbumFromData(each))

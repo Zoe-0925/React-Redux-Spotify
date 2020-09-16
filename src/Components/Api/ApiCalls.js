@@ -51,7 +51,6 @@ export async function fetchArtistsTopTracks(token) {
     return data.tracks;
 }
 
-
 export async function fetchTracksForAlbum(token, albumId) {
     const url = api_base_url + "albums/" + albumId + "/tracks"
     var myRequest = createRequest(token, url, "GET")
@@ -119,6 +118,7 @@ export async function fetchSavedArtists(token) {
     return data.artists.items;
 }
 
+
 export async function fetchSavedTracks(token) {
     const url = api_base_url + "me/tracks"
     var myRequest = createRequest(token, url, "GET")
@@ -126,6 +126,7 @@ export async function fetchSavedTracks(token) {
     const data = await response.json()
     return data.items;
 }
+
 
 export async function fetchSavedTracksNextPage(token, pageNumber) {
     const url = api_base_url + "me/tracks?limit=10&offset=" + (pageNumber - 1) * 20

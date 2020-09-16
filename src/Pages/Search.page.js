@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from 'uuid';
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 import SearchBar from "../Components/SearchBar/SearchBar"
 import AlbumCard from "../Components/TrackCard/AlbumCard"
 import ArtistCard from "../Components/TrackCard/ArtistCard"
@@ -13,7 +13,6 @@ export default function Searchpage() {
     const [tracks, setTracks] = useState([])
     const [artists, setArtists] = useState([])
     const [albums, setAlbums] = useState([])
-    const [playlists, setPlaylists] = useState([])
     const [trackSaved, setTrackSaved] = useState([])
     const [notFound, setNotFound] = useState(false)
     const tracksToToggle = useSelector(getTrackToToggle)
@@ -25,27 +24,23 @@ export default function Searchpage() {
         }
     }, [getTrackToToggle])
 
-
-
     function handleResult(data) {
-        setShowResults(false)
-        setTracks(data.tracks)
-        setArtists(data.artists)
-        setAlbums(data.albums)
-        setPlaylists(data.playlists)
-        setShowResults(true)
+        if (data) {
+            setShowResults(false)
+            setTracks(data.tracks)
+            setArtists(data.artists)
+            setAlbums(data.albums)
+            setShowResults(true)
+        }
+        else{
+            setNotFound(true)
+        }
     }
-
-    function displayError(err) {
-        console.log(err)
-    }
-
-
 
     return (
         <div className="Searchpage">
             <div className="SearchResults">
-                <SearchBar found={handleResult} onErr={displayError} />
+                <SearchBar found={handleResult} />
                 {notFound && <p className="not-found-message">We could not find any result.</p>}
                 {showResults &&
                     <div className="tracks">

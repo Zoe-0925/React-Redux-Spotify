@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from "react-redux"
 import history from "../Components/history"
 import { fetchArtistsAlbumsLoading } from "../Actions/ArtistActions"
@@ -109,30 +109,31 @@ export const useSavedTracks = () => {
 
     }, [pageNumber])
 
-
-    const observer = useRef()
-    const lastTrackElementRef = useCallback(node => {
-        if (loading) return
-        if (observer.current) observer.current.disconnect()
-        observer.current = new IntersectionObserver(entries => {
-            console.log("entries", entries, entries[0])
-            // TODO wrong entries[0].isIntersecting
-            if (entries[0].isIntersecting && hasMore) {
-                //TODO isIntersecting??????
-
-                setPageNumber(prevPageNumber => prevPageNumber + 1)
-            }
-        })
-        if (node) observer.current.observe(node)
-    }, [loading, hasMore])
-
-    return { trackSaved, tracks, lastTrackElementRef }
+    /** 
+        const observer = useRef()
+        const lastTrackElementRef = useCallback(node => {
+            if (loading) return
+            if (observer.current) observer.current.disconnect()
+            observer.current = new IntersectionObserver(entries => {
+                console.log("entries", entries, entries[0])
+                // TODO wrong entries[0].isIntersecting
+                if (entries[0].isIntersecting && hasMore) {
+                    //TODO isIntersecting??????
+    
+                    setPageNumber(prevPageNumber => prevPageNumber + 1)
+                }
+            })
+            if (node) observer.current.observe(node)
+        }, [loading, hasMore])
+    */
+    return { trackSaved, tracks }
 }
 
 export const useSaveArtist = () => {
     const dispatch = useDispatch()
 
     const fetchToggleFollowArtist = useCallback(id => {
+        //TODO
 
     },
         [dispatch]

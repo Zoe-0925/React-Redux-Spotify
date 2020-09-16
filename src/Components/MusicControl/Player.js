@@ -1,4 +1,4 @@
-import React, { useState, useEffect ,useCallback} from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux"
 import { getSongPlaying, getPlayingTrack } from "../../Reducers/Selectors"
 
@@ -9,23 +9,23 @@ export const useAudio = () => {
     const [audio] = useState(new Audio(url));
     const playing = useSelector(getSongPlaying)
 
-    const pause = ()=>{}
-    const resume = ()=>{}
-    const stop = ()=>{}
-    
+    const pause = () => { }
+    const resume = () => { }
+    const stop = () => { }
+
 
     const toggle = useCallback(
         () => {
             if (playing) { dispatch(pause()) }
             else { dispatch(resume) }
         },
-        [dispatch],
+        [dispatch, playing],
     )
 
     useEffect(() => {
         playing ? audio.play() : audio.pause();
     },
-        [playing]
+        [playing, audio]
     );
 
     useEffect(() => {
@@ -35,10 +35,10 @@ export const useAudio = () => {
         };
     }, []);
 
-    return [playing, toggle];
+    return [playing, toggle, audio];
 };
 
-const Player = ({hide}) => {
+const Player = ({ hide }) => {
     const [playing, toggle] = useAudio();
 
     return (

@@ -1,27 +1,20 @@
-import { fork, all, takeLatest, select, takeEvery, put } from 'redux-saga/effects';
+import { fork, takeLatest, select, put } from 'redux-saga/effects';
 import {
-    saveRemoveTrack, saveRemoveAlbum, followUnfollowArtist, checkFollowAlbum,
-    checkFollowTracks
+    saveRemoveTrack, saveRemoveAlbum, followUnfollowArtist, // checkFollowAlbum, checkFollowTracks
 } from "../Components/Api/ApiCalls"
 
 import {
-    getTrackIdAndIndex,getArtistToToggle, getAlbumToToggle, getPlaylistToToggle,
-    getCurrentAlbumId ,getToken
+    getTrackIdAndIndex, getArtistToToggle, getAlbumToToggle, // getPlaylistToToggle,
+    getCurrentAlbumId, getToken
 } from "../Reducers/Selectors"
 import {
-    LOAD_LIBRARY_PAGE, FETCH_TOGGLE_ALBUM_SAVED_LOADING,
-    LOAD_NEXT_TRACKS, toggleTrack, toggleAlbum, toggleArtist, togglePlaylist
+    FETCH_TOGGLE_ALBUM_SAVED_LOADING, toggleTrack, toggleAlbum,  //toggleArtist, togglePlaylist,   LOAD_LIBRARY_PAGE, 
 } from "../Actions/LibraryActions"
-import { FETCH_TOGGLE_ARTIST_SAVED, FETCH_ARTISTS_ALBUMS_SUCCESSFUL } from "../Actions/ArtistActions"
+import {
+    FETCH_TOGGLE_ARTIST_SAVED,
+    // FETCH_ARTISTS_ALBUMS_SUCCESSFUL
+} from "../Actions/ArtistActions"
 
-export function* fetchNextTracks() {
-    //The library page should save the page number to the store
-
-    //get page number from the store
-    //and call fetch 
-    //save the returned data to the next tracks in the library reducer
-
-}
 
 //TODO need the track index, and track id.
 // check if this index has been saved
@@ -80,6 +73,7 @@ export function* fetchToggleArtist() {
     }
 }
 
+/** 
 export function* fetchTogglePlaylist() { }
 
 export function* checkArtistSaved() { }
@@ -89,16 +83,7 @@ export function* checkAlbumSaved() { }
 export function* checkTracksaved() { }
 
 export function* checkPlaylistSaved() { }
-
-export function* checkLibrarySaved() { }
-
-
-
-export function* watchFetchNextTracks() {
-    yield takeLatest(LOAD_NEXT_TRACKS, fetchNextTracks)
-}
-
-
+*/
 
 export function* watchToggleAlbumSaved() {// When the user toggles to save or remove the current album
     yield takeLatest(FETCH_TOGGLE_ALBUM_SAVED_LOADING, fetchToggleAlbum)
@@ -108,13 +93,7 @@ export function* watchToggleArtistSaved() {// When the user toggles to follow or
     yield takeLatest(FETCH_TOGGLE_ARTIST_SAVED, fetchToggleArtist)
 }
 
-export function* watchCheckLibraryPageSaved() {
-    yield takeLatest(LOAD_LIBRARY_PAGE, checkLibrarySaved)
-}
-
 export const LibrarySaga = [
-    fork(watchFetchNextTracks),
-    fork(watchCheckLibraryPageSaved),
     fork(watchToggleArtistSaved),
     fork(watchToggleAlbumSaved),
 ]
