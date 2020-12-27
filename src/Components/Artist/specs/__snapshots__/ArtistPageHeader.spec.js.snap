@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="ArtistPageHeader"
+>
+  <div
+    className="playlistPageImage"
+  >
+    <img
+      alt="artist"
+      src="https://i.scdn.co/image/ab67616d0000b2736040effba89b9b00a6f6743a"
+    />
+  </div>
+  <div
+    className="playlistPageContent"
+  >
+    <p
+      className="smallText uppercase bold"
+    >
+      VERIFIED ARTIST
+    </p>
+    <h1>
+      Lady Gaga
+    </h1>
+  </div>
+</div>
+`;

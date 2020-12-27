@@ -1,0 +1,776 @@
+$greyDark: #040404;
+$greyLight: #171616;
+$greyLighter: #282828;
+$greyText: #b3b3b3;
+$greyNav: #090909;
+$greenMain: #1db954;
+$nearlyBlack: #0a0a0a;
+
+
+@font-face {
+  font-family: circular-book;
+  src: url(./fonts/CircularStd-Book.otf);
+}
+
+@font-face {
+  font-family: circular-bold;
+  src: url(./fonts/CircularStd-Bold.otf);
+}
+
+@font-face {
+  font-family: circular-black;
+  src: url(./fonts/CircularStd-Black.otf);
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.smallText {
+  font-size: 0.75rem;
+  letter-spacing: 0.8px;
+  &.bold {
+    font-weight: 600;
+  }
+}
+
+body {
+  font-family: circular-book;
+  width: 100%;
+  background-color: $greyLight;
+}
+
+.subText {
+  font-size: 0.9rem;
+  color: $greyText;
+}
+
+.full-screen {
+  width: 100vw;
+  height: 100vh;
+}
+
+.App {
+  background: grey;
+  width: 100vw;
+  height: 100%;
+  background: $greyLight;
+  display: grid;
+
+  .upperPart {
+    grid-row-end: 2;
+    display: grid;
+    grid-auto-flow: row;
+    text-align: center;
+    width: 100vw;
+    height: 100%;
+    overflow: scroll;
+    background-color: $greyLight;
+
+    .main {
+      margin-left: 230px;
+      padding: 0;
+      margin: 0;
+      width: 100vw;
+      height: 100%;
+      overflow: scroll;
+      position: relative;
+      background-color: $greyLight;
+      color: white;
+
+      h1,
+      h2 {
+        font-size: 1.8rem;
+      }
+    }
+
+    .song-player-container {
+      height: 20%;
+      grid-row-start: 2;
+    }
+
+    .SideMenu {
+      z-index: 1;
+      position: fixed;
+      color: $greyText;
+      text-align: left;
+      width: 230px;
+      background-color: $nearlyBlack;
+      height: stretch;
+      margin: 0;
+
+      .container {
+        width: 100vmax;
+
+        .nav-icon {
+          font-size: 2rem;
+          color: $greyText;
+        }
+
+        .nav-divider {
+          font-size: 0.85rem;
+          margin-left: 2rem;
+          margin-top: 2rem;
+          margin-bottom: 1rem;
+        }
+
+        .link {
+          width: 230px;
+        }
+
+        .link:hover {
+          color: white;
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .musicControls {
+    position: fixed;
+    width: 100%;
+    background: $greyLighter;
+    text-align: center;
+    height: 5.625rem;
+    display: flex;
+    align-items: flex-end;
+    left: 0;
+    bottom: 0;
+    color: white;
+    z-index: 1;
+    border-top: 1px solid $greyDark;
+
+    .song-controls {
+      display: flex;
+      color: white;
+      align-items: flex-start;
+      margin-left: 10rem;
+      padding-left: 10rem;
+
+      .icon {
+        cursor: pointer;
+        display: inline;
+      }
+    }
+
+    .fa {
+      color: white;
+    }
+  }
+}
+
+.playIcon {
+  @extend .playIcon;
+  opacity: 1;
+  position: relative;
+  margin-left: 0;
+  height: 56px;
+  width: 56px;
+  right: 0;
+  bottom: 0;
+  svg {
+    height: 26px;
+    width: 26px;
+  }
+}
+
+.playlistPage {
+  background-color: rgb(214, 214, 214);
+  .mainInner {
+    background-image: -webkit-gradient(
+      linear,
+      left top,
+      left bottom,
+      from(rgba(0, 0, 0, 0.5)),
+      color-stop(40%, #121212)
+    );
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), #121212 40%);
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+  }
+  .playlistPageInfo {
+    display:flex;
+    // width: 300px;
+    text-align: center;
+    .playlistPageImage {
+      font-size: 15.625rem;
+      width: 15.625rem;
+      height: 15.625rem;
+      object-fit: cover;
+      -webkit-box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);
+    }
+  }
+  .playlistPageSongs {
+    height: 100%;
+    .playlistButtons {
+      display: flex;
+      align-items: center;
+    }
+    .playIcon {
+      @extend .playIcon;
+      opacity: 1;
+      position: relative;
+      margin-left: 0;
+      height: 56px;
+      width: 56px;
+      right: 0;
+      bottom: 0;
+      svg {
+        height: 26px;
+        width: 26px;
+      }
+    }
+    .icons {
+      .icon {
+        margin-left: 1.5rem;
+      }
+      .iconsHeart {
+        width: 28px;
+        height: 28px;
+        svg {
+          fill: white;
+        }
+      }
+    }
+  }
+  .playlistPageContent {
+    text-align: left;
+    color: white;
+    width: 100%;
+
+    h1 {
+      font-size: 2.5rem;
+      margin: 0;
+      line-height: 1;
+      font-family: circular-black;
+      word-spacing: -18px;
+      letter-spacing: -6px;
+      color: white;
+    }
+    .tagline {
+      font-size: 0.9rem;
+      opacity: 0.7;
+      margin-bottom: 0.5rem;
+    }
+    .playlistPageDesc {
+      align-items: center;
+      font-size: 0.9rem;
+      p {
+        margin: 0;
+      }
+      span {
+        opacity: 0.7;
+        position: relative;
+        padding-left: 20px;
+        &:before {
+          content: "";
+          width: 4px;
+          height: 4px;
+          background: white;
+          overflow: hidden;
+          border-radius: 50%;
+          position: absolute;
+          margin-left: -10px;
+          top: 9px;
+        }
+      }
+    }
+  }
+}
+
+ul.songList {
+  z-index: 1;
+  height: 100vmax;
+  margin-left: 240px;
+  padding: 1rem;
+  text-align: left;
+  li {
+    padding: 0.5rem;
+    list-style-type: none;
+    width: 95%;
+    display: flex;
+    align-items: center;
+    transition: background 0.2s ease-in-out;
+    .artist-name{
+      font-weight: 300;
+    }
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      .songIcon {
+        cursor: pointer;
+        .noteI {
+          display: none;
+        }
+        .playI {
+          display: block;
+        }
+      }
+    }
+    .songDetails {
+      z-index: 1;
+      h3 {
+        margin: 0;
+        font-weight: 300;
+        font-size: 1rem;
+      }
+      span {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.9rem;
+      }
+    }
+    .songTime {
+      margin-left: auto;
+    }
+    .songIcon {
+      padding-right: 1rem;
+      .playI {
+        display: none;
+      }
+      svg {
+        fill: rgba(255, 255, 255, 0.7);
+        width: 15px;
+        height: 15px;
+      }
+    }
+  }
+}
+
+.songDetails,
+.songTime {
+  color: white;
+}
+
+.artist-name {
+  cursor: pointer;
+}
+
+.Searchpage {
+  display: flex;
+  width: 100%;
+
+  .SearchResults {
+    height: 638px;
+    overflow: scroll;
+    width: 100%;
+
+    .songList {
+      height: 250px;
+      overflow: scroll;
+      width: 100%;
+    }
+  }
+}
+
+.search-input {
+  height: 40px;
+  font-size: 20px;
+  width: 330px;
+  border-top-left-radius: 30px 40%;
+  border-bottom-left-radius: 30px 40%;
+  border-top-right-radius: 30px 40%;
+  border-bottom-right-radius: 30px 40%;
+}
+
+.LibraryPage {
+  display: grid;
+  width: 80%;
+  margin-left: 240px;
+
+  .head-row {
+    display: flex;
+    align-items: flex-start;
+    z-index: 1;
+  }
+
+  .tab {
+    width: 5.5rem;
+    height: 3.125rem;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .library-tab {
+    text-align: center;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    color: white;
+    font-weight: 600;
+  }
+
+  .selected {
+    background-color: $greyLighter;
+  }
+
+  ul {
+    height: 600px;
+    overflow: scroll;
+  }
+
+  .list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    grid-gap: 0.5rem;
+    align-items: center;
+    width: 100%;
+    margin-right: 2rem;
+  }
+}
+
+.AlbumPage {
+  display: flex;
+}
+
+.Homepage {
+  width: 80%;
+
+  .TrackCardList {
+    margin-left: 240px;
+    display: grid;
+    width: 100%;
+    margin-bottom: 2rem;
+    margin-right: 1rem;
+
+    .list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      grid-gap: 0.5rem;
+      align-items: center;
+      width: 100%;
+    }
+
+    .title {
+      align-items: center;
+      display: flex;
+      width: 100%;
+      cursor: pointer;
+      font-size: 1.875rem;
+      margin-top: 2rem;
+      margin-bottom: 0;
+    }
+  }
+}
+
+.card {
+  z-index: 1;
+  background-color: #282828;
+  height: 250px;
+  max-width: 180px;
+  border-radius: 10px;
+  padding: 0;
+  margin: 0;
+
+  img {
+    cursor: pointer;
+    margin-bottom: 0.5rem;
+    width: 10rem;
+    height: 10rem;
+    margin-bottom: 0;
+    margin-top: 0.8rem;
+  }
+
+  .card-title {
+    text-align: left;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 0.5rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+  }
+
+  .card-subtitle {
+    align-items: left;
+    align-content: left;
+    text-align: left;
+    margin-top: 0;
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
+    color: $greyText;
+    margin-bottom: 0em;
+    cursor: pointer;
+  }
+
+  .artist-card-image {
+    border-radius: 50%;
+  }
+
+  .cardContent {
+    text-align: left;
+    margin-top: 0%;
+    margin-bottom: 20%;
+    color: white;
+    width: 100%;
+  }
+}
+
+.savedIcon {
+  color: $greenMain;
+}
+
+.ArtistPageHeader {
+  color: white;
+  width: 100%;
+  display:flex;
+  text-align:left;
+
+  .verified{
+    margin-top:3rem;
+    margin-bottom: 1rem;
+  }
+
+  .artist-name{
+    font-size: 5rem;
+    font-weight: 600;
+    margin-top:0;
+  }
+
+  .playlistPageImage {
+    font-size: 16rem;
+    width: 16rem;
+    height: 16rem;
+    object-fit: cover;
+    -webkit-box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);
+  }
+}
+
+.popular {
+  color: white;
+
+  .songList {
+    color: white;
+  }
+}
+
+.coloredIcon {
+  color: $greenMain;
+  align-self: top;
+  cursor: pointer;
+}
+
+.unfilledIcon {
+  color: transparent;
+  align-self: top;
+  cursor: pointer;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+
+  .background {
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .Login {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 100;
+    width: auto;
+    height: auto;
+    color: white;
+    background-color: white;
+    text-align: center;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+  }
+}
+.ShowMoreLink {
+  text-align: center;
+  cursor: pointer;
+  font-size: 1.5625rem;
+}
+
+.ArtistTrackCard {
+  z-index: 1;
+  height: 240px;
+  width: 180px;
+  cursor: pointer;
+
+  .ArtistTrackCard-img {
+    width: 100%;
+    height: 180px;
+  }
+
+  .title {
+    font-size: 1rem;
+    text-align: center;
+    padding-top: 0.5rem;
+  }
+}
+
+.not-found-message {
+  color: white;
+}
+
+.ArtistPage {
+  display: grid;
+  width: 80%;
+  height: 100%;
+  margin-left: 240px;
+
+  h1 {
+    color: white;
+    text-align: left;
+  }
+
+  .list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    grid-gap: 0.5rem;
+    align-items: center;
+    width: 100%;
+    margin-right: 2rem;
+  }
+
+  .content {
+    margin-top: 0;
+    margin-bottom: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    grid-gap: 0.5rem;
+    width: 100%;
+  }
+}
+.title {
+  color: white;
+  padding-bottom: 3rem;
+}
+
+.round {
+  border-radius: 50%;
+}
+
+/**Track list item  below :**/
+
+.TracklistItem {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 0.5rem;
+  background-color: grey;
+  margin-left: 7%;
+  margin-right: 7%;
+}
+
+.space {
+  width: 60%;
+}
+
+.time {
+  text-align-last: right;
+}
+
+.artist-name:hover,
+.album-name:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  color: white;
+}
+
+.artist-album-name-container {
+  display: flex;
+  align-items: left;
+}
+
+/**Track list item above :**/
+
+.hide {
+  display: none;
+}
+
+/** SongControl */
+.song-details {
+  position: absolute;
+  left: 20px;
+  line-height: 22px;
+}
+
+.song-details .song-name {
+  font-family: "Proxima Nova", Georgia, sans-serif;
+  color: #fff;
+  font-size: 14px;
+}
+
+.song-details .artist-name {
+  font-family: "Proxima Thin", Georgia, sans-serif;
+  color: #aaa;
+  font-size: 12px;
+}
+
+.song-controls {
+  justify-content: center;
+  display: flex;
+  margin-top: 20px;
+}
+
+.forward,
+.reverse,
+.play-btn {
+  padding: 0 5px;
+  color: rgb(179, 179, 179);
+  cursor: pointer;
+}
+
+.reverse,
+.forward {
+  font-size: 16px;
+}
+
+.song-player-container .play-btn {
+  position: relative;
+  top: -7px;
+  font-size: 40px;
+}
+
+.song-player-container .pause-btn {
+  position: relative;
+  top: -7px;
+  font-size: 40px;
+  margin: 0 5px;
+}
+
+.play-btn .fa {
+  -webkit-text-stroke: 4px rgb(40, 40, 40);
+}
+
+.song-progress-container {
+  margin-top: -10px;
+  display: flex;
+  justify-content: center;
+}
+
+.song-progress {
+  width: 500px;
+  height: 4px;
+  background: rgb(64, 64, 64);
+  border-radius: 4px;
+}
+
+.song-expired {
+  margin: 0;
+  width: 100px;
+  height: 4px;
+  background: #1db954;
+  border-radius: 4px;
+}
+
+.timer-start {
+  font-size: 12px;
+  position: relative;
+  top: -5px;
+  left: -10px;
+}
+
+.timer-end {
+  font-size: 12px;
+  position: relative;
+  top: -5px;
+  left: 10px;
+}
+/** SongControl end here  */
